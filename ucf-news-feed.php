@@ -23,7 +23,8 @@ class UCF_News_Feed {
 		$query = http_build_query( array(
 			'per_page'   => $args['limit'],
 			'categories' => $args['categories'],
-			'tags'       => $args['tags'] 
+			'tags'       => $args['tags'],
+			'_embed'      => true
 		) );
 
 		$req_url = $args['url'] . 'posts?' . $query;
@@ -39,20 +40,6 @@ class UCF_News_Feed {
 		$file = file_get_contents( $req_url, false, $context );
 
 		$items = json_decode( $file );
-
-		foreach( $items as $item ) {
-			if ( $item->featured_media ) {
-				$req_url = $args['url'] . 'media/' . (int) $item->featured_media;
-
-				$media = file_get_contents( $req_url, false, $context );
-
-				$image_meta = json_decode( $media );
-
-				if ( $image_meta ) {
-					$item->image = $image_meta->media_details;
-				} 
-			}
-		}
 
 		return $items;
 	}

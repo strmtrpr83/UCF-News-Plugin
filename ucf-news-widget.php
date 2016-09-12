@@ -24,7 +24,7 @@ class UCF_News_Widget extends WP_Widget {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : 'News';
 		$sections =	$instance['sections'];
 		$topics = $instance['topics'];
-		$limit = $instance['limit'];
+		$limit = (int) $instance['limit'];
 
 		 $items = UCF_News_Feed::get_news_items( array(
 			'title'    => $title,
