@@ -25,6 +25,7 @@ class UCF_News_Widget extends WP_Widget {
 		$sections =	$instance['sections'];
 		$topics = $instance['topics'];
 		$limit = (int) $instance['limit'];
+		$layout = $instance['layout'];
 
 		 $items = UCF_News_Feed::get_news_items( array(
 			'title'    => $title,
@@ -33,12 +34,13 @@ class UCF_News_Widget extends WP_Widget {
 			'limit'    => $limit
 		) );
 
-		UCF_News_Common::display_news_items( $items, 'classic', $title );
+		UCF_News_Common::display_news_items( $items, $layout, $title );
 
 	}
 
 	public function form( $instance ) {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'News', 'ucf_news' );
+		$layout = ! empty( $instance['layout'] ) ? $instance['layout'] : 'classic';
 		$sections = ! empty( $instance['sections'] ) ? $instance['sections'] : '';
 		$topics = ! empty( $instance['topics'] ) ? $instance['topics'] : '';
 		$limit = ! empty( $instance['limit'] ) ? $instance['limit'] : '3';
@@ -56,6 +58,14 @@ class UCF_News_Widget extends WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'topics' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'topics' ) ); ?>" type="text" value="<?php echo esc_attr( $topics ); ?>" >
 		</p>
 		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>"><?php echo __( 'Select Layout' ); ?></label>
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'layout' ) ); ?>" type="text">
+			<?php foreach( get_layouts() as $key=>$value ) : ?>
+				<option value="<?php echo $key; ?>" <?php echo ( $layout == $key ) ? 'selected' : ''; ?>><?php echo $value; ?></option>
+			<?php endforeach; ?>
+			</select>
+		</p>
+		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>"><?php echo __( 'Limit results' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'limit' ) ); ?>" type="number" value="<?php echo esc_attr( $limit ); ?>" >
 		</p>
@@ -68,6 +78,7 @@ class UCF_News_Widget extends WP_Widget {
 		$instance['sections'] = ( ! empty( $new_instance['sections'] ) ) ? str_replace( ' ', '', $new_instance['sections'] ) : '';
 		$instance['topics']   = ( ! empty( $new_instance['topics'] ) ) ? str_replace( ' ', '', $new_instance['topics'] ) : '';
 		$instance['limit']    = ( ! empty( $new_instance['limit'] ) ) ? (int) $new_instance['limit'] : 3;
+		$instance['layout']   = ( ! empty( $new_instance['layout'] ) ) ? $new_instance['layout'] : 'classic';
 
 		return $instance;
 	}

@@ -44,4 +44,18 @@ function ucf_news_add_customizer_settings( $wp_customize ) {
 
 add_action( 'customize_register', 'ucf_news_add_customizer_settings' );
 
+function get_layouts() {
+	$layouts = array(
+		'classic' => 'Classic Layout',
+	);
+
+	$layouts = apply_filters( 'ucf_news_get_layouts', $layouts );
+
+	return $layouts;
+}
+
+function ucf_news_get_layouts( $layouts ) {
+	return $layouts;
+}
+
 ?>
