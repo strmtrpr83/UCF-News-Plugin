@@ -25,6 +25,8 @@ add_action( 'plugins_loaded', function() {
 	include_once 'ucf-news-shortcode.php';
 	include_once 'ucf-news-widget.php';
 
+	add_action( UCF_Modular::$slug . '_config', UCF_Modular::$config->add_shortcode( 'UCF_News_Shortcode' ) );
+
 } );
 
 ?>

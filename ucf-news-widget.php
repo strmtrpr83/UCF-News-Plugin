@@ -60,7 +60,7 @@ class UCF_News_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>"><?php echo __( 'Select Layout' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'layout' ) ); ?>" type="text">
-			<?php foreach( get_layouts() as $key=>$value ) : ?>
+			<?php foreach( UCF_News_Config::get_layouts() as $key=>$value ) : ?>
 				<option value="<?php echo $key; ?>" <?php echo ( $layout == $key ) ? 'selected' : ''; ?>><?php echo $value; ?></option>
 			<?php endforeach; ?>
 			</select>

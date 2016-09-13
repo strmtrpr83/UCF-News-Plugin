@@ -72,4 +72,6 @@ function ucf_news_display_classic_after( $items, $title ) {
 	echo ob_get_clean();
 }
 
+add_action( 'ucf_news_display_classic_after', 'ucf_news_display_classic_after', 10, 2 );
+
 ?>
