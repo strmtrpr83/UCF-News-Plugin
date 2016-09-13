@@ -26,7 +26,7 @@ class UCF_News_Common {
 function ucf_news_display_classic_before( $items, $title ) {
 	ob_start();
 ?>
-	<aside class="news classic">
+	<div class="news classic">
 		<h2 class="news-title"><?php echo $title; ?></h2> 
 <?php
 	echo ob_get_clean();
@@ -67,7 +67,7 @@ add_action( 'ucf_news_display_classic', 'ucf_news_display_classic', 10, 2 );
 function ucf_news_display_classic_after( $items, $title ) {
 	ob_start();
 ?>
-	</aside>
+	</div>
 <?php
 	echo ob_get_clean();
 }

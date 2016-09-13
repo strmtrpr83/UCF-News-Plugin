@@ -34,8 +34,15 @@ class UCF_News_Widget extends WP_Widget {
 			'limit'    => $limit
 		) );
 
+		ob_start();
+?>
+		<aside class="widget ucf-news-widget">
+<?php
 		UCF_News_Common::display_news_items( $items, $layout, $title );
-
+?>
+		</aside>
+<?php
+		echo ob_get_clean();
 	}
 
 	public function form( $instance ) {
