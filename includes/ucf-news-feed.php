@@ -44,6 +44,45 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 
 			return $items;
 		}
+
+		public static function get_sections( $search ) {
+			$base_url = get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' );
+			$url = $base_url . 'categories/?search=' . $search;
+
+			$opts = array(
+				'http' => array(
+					'timeout' => 15
+				)
+			);
+
+			$context = stream_context_create( $opts );
+
+			$file = file_get_contents( $url, false, $context );
+
+			$retval = json_decode( $file );
+
+			return $retval;
+
+		}
+
+		public static function get_topics( $search ) {
+			$base_url = get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' );
+			$url = $base_url . 'tags/?search=' . $search;
+
+			$opts = array(
+				'http' => array(
+					'timeout' => 15
+				)
+			);
+
+			$context = stream_context_create( $opts );
+
+			$file = file_get_contents( $url, false, $context );
+
+			$retval = json_decode( $file );
+
+			return $retval;
+		}
 	}
 }
 ?>

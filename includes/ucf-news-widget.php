@@ -47,11 +47,13 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		}
 
 		public function form( $instance ) {
-			$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'News', 'ucf_news' );
-			$layout = ! empty( $instance['layout'] ) ? $instance['layout'] : 'classic';
-			$sections = ! empty( $instance['sections'] ) ? $instance['sections'] : '';
-			$topics = ! empty( $instance['topics'] ) ? $instance['topics'] : '';
-			$limit = ! empty( $instance['limit'] ) ? $instance['limit'] : '3';
+			$options = UCF_News_Config::apply_default_options( $instance );
+
+			$title = $options['title'];
+			$layout = $options['layout'];
+			$sections = $options['sections'];
+			$topics = $options['topics'];
+			$limit = $options['limit'];
 	?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo __( 'Title' ); ?></label>
@@ -59,19 +61,11 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			</p>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'sections' ) ); ?>"><?php echo __( 'Filter by sections' ); ?></label>
-				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'sections' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'sections' ) ); ?>" type="text" value="<?php echo esc_attr( $sections ); ?>" >
+				<input class="widefat section-input" id="<?php echo esc_attr( $this->get_field_id( 'sections' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'sections' ) ); ?>" type="text" value="<?php echo esc_attr( $sections ); ?>" >
 			</p>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'topics' ) ); ?>"><?php echo __( 'Filter by topics' ); ?></label>
-				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'topics' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'topics' ) ); ?>" type="text" value="<?php echo esc_attr( $topics ); ?>" >
-			</p>
-			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>"><?php echo __( 'Select Layout' ); ?></label>
-				<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'layout' ) ); ?>" type="text">
-				<?php foreach( UCF_News_Config::get_layouts() as $key=>$value ) : ?>
-					<option value="<?php echo $key; ?>" <?php echo ( $layout == $key ) ? 'selected' : ''; ?>><?php echo $value; ?></option>
-				<?php endforeach; ?>
-				</select>
+				<input class="widefat topic-input" id="<?php echo esc_attr( $this->get_field_id( 'topics' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'topics' ) ); ?>" type="text" value="<?php echo esc_attr( $topics ); ?>" >
 			</p>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>"><?php echo __( 'Limit results' ); ?></label>
@@ -81,14 +75,21 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		}
 
 		public function update( $new_instance, $old_instance ) {
-			$instance = array();
-			$instance['title']    = ( ! empty( $new_instance['title'] ) ) ? $new_instance['title'] : __( 'News', 'ucf-news' );
-			$instance['sections'] = ( ! empty( $new_instance['sections'] ) ) ? str_replace( ' ', '', $new_instance['sections'] ) : '';
-			$instance['topics']   = ( ! empty( $new_instance['topics'] ) ) ? str_replace( ' ', '', $new_instance['topics'] ) : '';
-			$instance['limit']    = ( ! empty( $new_instance['limit'] ) ) ? (int) $new_instance['limit'] : 3;
-			$instance['layout']   = ( ! empty( $new_instance['layout'] ) ) ? $new_instance['layout'] : 'classic';
+			$instance = UCF_News_Config::apply_default_options( $new_instance );
 
 			return $instance;
+		}
+
+		public function add_script() {
+			wp_enqueue_script( 'suggest' );
+		}
+
+		public function add_script_config() {
+?>
+		<script type="text/javascript">
+			jQuery('.section-input').suggest("<?php echo UCF_News_Admin_API::get_plugin_namespace() . '/sections'; ?>", {multiple:true, multipleSep: ","}); 
+		</script>
+<?php
 		}
 	}
 
