@@ -11,7 +11,7 @@ class UCF_News_Shortcode extends UCF_Modular_Shortcode {
 		$wysiwyg     = TRUE;
 
 	function params() {
-		$layouts = UCF_NewsConfig::get_layouts();
+		$layouts = UCF_News_Config::get_layouts();
 		
 		return array(
 			array(
