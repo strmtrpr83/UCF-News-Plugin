@@ -11,13 +11,6 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 add_action( 'plugins_loaded', function() {
-	if ( ! class_exists( 'UCF_Modular' ) ) {
-		wp_die(
-			__( 'This plugin requires the UCF Modular Framework plugin to be installed and activated.' ),
-			__( 'Error' ),
-			array( 'back_link' => true )
-		);
-	}
 
 	include_once 'ucf-news-config.php';
 	include_once 'ucf-news-feed.php';
