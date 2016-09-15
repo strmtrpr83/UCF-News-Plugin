@@ -6,7 +6,7 @@
 class UCF_News_Feed {
 	public static function get_news_items( $args ) {
 		$args = array(
-			'url'        => get_theme_mod( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' ),
+			'url'        => get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' ),
 			'limit'      => $args['limit'] ? (int) $args['limit'] : 3,
 			'offset'     => $args['offset'] ? (int) $args['offset'] : null,
 			'categories' => is_array( $args['sections'] ) ? implode( '+', $args['sections'] ) : null,

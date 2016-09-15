@@ -12,13 +12,17 @@ if ( ! defined( 'WPINC' ) ) {
 
 add_action( 'plugins_loaded', function() {
 
-	include_once 'ucf-news-config.php';
-	include_once 'ucf-news-feed.php';
-	include_once 'ucf-news-common.php';
-	include_once 'ucf-news-shortcode.php';
-	include_once 'ucf-news-widget.php';
+	define( 'UCF_NEWS__PLUGIN_DIR', plugins_url( '/ucf-news/' ) );
 
-	add_action( UCF_Modular::$slug . '_config', UCF_Modular::$config->add_shortcode( 'UCF_News_Shortcode' ) );
+	include_once 'includes/ucf-news-config.php';
+	include_once 'includes/ucf-news-feed.php';
+	include_once 'includes/ucf-news-common.php';
+	include_once 'includes/ucf-news-shortcode.php';
+	include_once 'includes/ucf-news-widget.php';
+
+	add_action( 'init', array( 'UCF_News_Shortcode', 'register_shortcode' ) );
+	add_action( 'admin_init', array( 'UCF_News_Shortcode', 'register_shortcode_interface' ) );
+	add_action( 'admin_menu', array( 'UCF_News_Config', 'add_options_page' ) );
 
 } );
 
