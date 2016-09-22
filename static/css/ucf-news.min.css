@@ -1,2 +1,1 @@
-.news-items .news-item{margin-bottom:20px;padding:6px 0}.news-items .news-item .news-thumbnail{float:left;margin-right:15px;max-height:66px;max-width:66px}.news-items .news-item .news-thumbnail .news-thumbnail-image{border-radius:10px;height:auto;max-width:100%}
-/*# sourceMappingURL=ucf-news.min.css.map */
+.news-items .news-item{margin-bottom:20px;padding:6px 0}.news-items .news-item .news-thumbnail{display:inline-block;margin-right:15px;max-height:66px;max-width:66px}.news-items .news-item .news-thumbnail .news-thumbnail-image{border-radius:10px;height:auto;max-width:100%}
