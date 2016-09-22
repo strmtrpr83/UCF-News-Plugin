@@ -78,12 +78,24 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 		public static function register_settings() {
 			register_setting( 'ucf-news-group', 'ucf_news_feed_url' );
 			register_setting( 'ucf-news-group', 'ucf_news_include_css' );
+			register_setting( 'ucf-news-group', 'ucf_news_fallback_image' );
 		}
 
 		public static function add_settings_page() {
+			if ( function_exists( 'wp_enqueue_media' ) ) {
+				wp_enqueue_media();
+			} else {
+				wp_enqueue_style( 'thickbox' );
+				wp_enqueue_script( 'media-upload' );
+				wp_enqueue_script( 'thickbox' );
+				wp_enqueue_media();
+			}
+
 			$defaults = self::get_default_options();
 			$ucf_news_feed_url = get_option( 'ucf_news_feed_url', $defaults['ucf_news_feed_url'] );
 			$ucf_news_include_css = get_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
+			$ucf_news_fallback_image = get_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
+			$ucf_news_fallback_image_src = $ucf_news_fallback_image ? UCF_News_Common::get_fallback_image( $ucf_news_fallback_image ) : '';
 
 	?>
 	<div class="wrap">
@@ -101,6 +113,14 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				<td><input type="checkbox" name="ucf_news_include_css" <?php echo ( $ucf_news_include_css === 'on' ) ? 'checked' : ''; ?>>
 					Include Default CSS
 				</input></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Fallback Image</th>
+				<td>
+					<img class="ucf_news_fallback_image_preview" src="<?php echo $ucf_news_fallback_image_src; ?>" height="100" width="100">
+					<input class="ucf_news_fallback_image" type="hidden" name="ucf_news_fallback_image" value="<?php echo $ucf_news_fallback_image; ?>">
+					<a href="#" class="ucf_news_fallback_image_upload">Upload</a>
+				</td>
 			</tr>
 		<?php submit_button(); ?>
 	</form>

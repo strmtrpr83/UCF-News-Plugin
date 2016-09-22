@@ -53,7 +53,8 @@ gulp.task('js-hint', function() {
 
 gulp.task('js-admin', function() {
   var minified = [
-    config.jsPath + '/ucf-news-admin.js'
+    config.jsPath + '/ucf-news-admin.js',
+    config.jsPath + '/ucf-news-upload.js'
   ];
 
   gulp.src(minified)

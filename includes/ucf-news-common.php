@@ -23,6 +23,17 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 				do_action( 'ucf_news_display_' . $layout . '_after', $items, $title );
 			}
 		}
+
+		public static function get_fallback_image( $size='thumbnail' ) {
+			$image_id = get_option( 'ucf_news_fallback_image', null );
+			$retval = null;
+			if ( $image_id ) {
+				$retval = wp_get_attachment_image_src( $image_id, $size );
+				$retval = $retval ? $retval[0] : null;
+			}
+
+			return $retval;
+		}
 	}
 
 	function ucf_news_display_classic_before( $items, $title ) {
@@ -37,6 +48,7 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 	add_action( 'ucf_news_display_classic_before', 'ucf_news_display_classic_before', 10, 2 );
 
 	function ucf_news_display_classic( $items, $title ) {
+		$fallback_image_id = get_option( 'ucf_news_fallback_image' );
 		ob_start();
 	?>
 		<div class="news-items">
@@ -44,9 +56,13 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 		foreach( $items as $item ) :
 	?>
 			<div class="news-item">
-			<?php if ( $item->featured_image !== 0 ) : 
-				$image = $item->_embedded->{'wp:featuredmedia'}[0];
-				$image_url = $image->media_details->sizes->thumbnail->source_url;
+			<?php if ( $item->featured_media !== 0 || $fallback_image_id ) :
+				if ( $item->featured_media == 0 ) {
+					$image_url = UCF_News_Common::get_fallback_image( 'thumbnail' );
+				}  else {
+					$image = $item->_embedded->{'wp:featuredmedia'}[0];
+					$image_url = $image->media_details->sizes->thumbnail->source_url;
+				}
 			?>
 				<div class="news-thumbnail">
 					<img class="news-thumbnail-image" src="<?php echo $image_url; ?>">
