@@ -1,4 +1,4 @@
-# UCF Events Plugin #
+# UCF News Plugin #
 
 Provides a shortcode, widget, functions, and default styles for displaying UCF news.
 
