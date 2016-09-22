@@ -10,8 +10,8 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 				'url'        => get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' ),
 				'limit'      => $args['limit'] ? (int) $args['limit'] : 3,
 				'offset'     => $args['offset'] ? (int) $args['offset'] : null,
-				'categories' => is_array( $args['sections'] ) ? implode( '+', $args['sections'] ) : null,
-				'tags'       => is_array( $args['topics'] ) ? implode( '+', $args['topics'] ) : null,
+				'categories' => $args['sections'] ? explode( ',', $args['sections'] ) : null,
+				'tags'       => $args['topics'] ? explode( ',', $args['topics'] ) : null,
 			);
 
 			// Empty array of indexes with no value.
@@ -21,12 +21,19 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 				unset( $args[$key] );
 			}
 
+			$categories = self::format_tax_arg( $args['categories'], 'category' );
+
+			$tags = self::format_tax_arg( $args['tags'], 'tag' );
+
+			$filter = array_merge( $categories, $tags );
+
 			$query = http_build_query( array(
 				'per_page'   => $args['limit'],
-				'categories' => $args['categories'],
-				'tags'       => $args['tags'],
-				'_embed'      => true
+				'filter'     => $filter,
+				'_embed'     => true
 			) );
+
+			$query = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);
 
 			$req_url = $args['url'] . 'posts?' . $query;
 
@@ -43,6 +50,12 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			$items = json_decode( $file );
 
 			return $items;
+		}
+
+		public static function format_tax_arg( $terms, $tax ) {
+			return array(
+				$tax . '_name' => array_filter( $terms )
+			);
 		}
 
 		public static function get_sections( $search ) {

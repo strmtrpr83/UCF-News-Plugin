@@ -23,8 +23,8 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		**/
 		public function widget( $args, $instance ) {
 			$title = ! empty( $instance['title'] ) ? $instance['title'] : 'News';
-			$sections =	$instance['sections'];
-			$topics = $instance['topics'];
+			$sections =	str_replace( ' ', '', $instance['sections'] );
+			$topics = str_replace( ' ', '', $instance['topics'] );
 			$limit = (int) $instance['limit'];
 			$layout = $instance['layout'];
 
@@ -78,18 +78,6 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			$instance = UCF_News_Config::apply_default_options( $new_instance );
 
 			return $instance;
-		}
-
-		public function add_script() {
-			wp_enqueue_script( 'suggest' );
-		}
-
-		public function add_script_config() {
-?>
-		<script type="text/javascript">
-			jQuery('.section-input').suggest("<?php echo UCF_News_Admin_API::get_plugin_namespace() . '/sections'; ?>", {multiple:true, multipleSep: ","}); 
-		</script>
-<?php
 		}
 	}
 
