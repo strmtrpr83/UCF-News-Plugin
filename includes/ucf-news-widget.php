@@ -23,6 +23,8 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		**/
 		public function widget( $args, $instance ) {
 			$title = ! empty( $instance['title'] ) ? $instance['title'] : 'News';
+			$title = apply_filters( 'widget_title', $title, $this->id_base );
+			$title = $args['before_title'] . $title . $args['after_title'];
 			$sections =	str_replace( ' ', '', $instance['sections'] );
 			$topics = str_replace( ' ', '', $instance['topics'] );
 			$limit = (int) $instance['limit'];
@@ -39,7 +41,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 	?>
 			<aside class="widget ucf-news-widget">
 	<?php
-			UCF_News_Common::display_news_items( $items, $layout, $title );
+			UCF_News_Common::display_news_items( $items, $layout, $title, 'widget' );
 	?>
 			</aside>
 	<?php

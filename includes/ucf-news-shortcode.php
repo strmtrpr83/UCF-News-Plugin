@@ -80,7 +80,7 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 			);
 
 			$items = UCF_News_Feed::get_news_items( $args );
-			echo UCF_News_Common::display_news_items( $items, $layout, $title );
+			echo UCF_News_Common::display_news_items( $items, $layout, $title, 'default' );
 		}
 	}
 }

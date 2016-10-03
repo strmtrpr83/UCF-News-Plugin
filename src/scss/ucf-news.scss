@@ -1,19 +1,21 @@
-.news-items {
-  .news-item {
+.ucf-news.classic {
+  .ucf-news-item {
+    clear: left;
     margin-bottom: 20px;
     padding: 6px 0;
+  }
 
-    .news-thumbnail {
-      display: inline-block;
-      margin-right: 15px;
-      max-height: 66px;
-      max-width: 66px;
+  .ucf-news-thumbnail {
+    display: block;
+    float: left;
+    margin-right: 15px;
+    max-height: 66px;
+    max-width: 66px;
 
-      .news-thumbnail-image {
-        border-radius: 10px;
-        height: auto;
-        max-width: 100%;
-      }
+    .ucf-news-thumbnail-image {
+      border-radius: 10px;
+      height: auto;
+      max-width: 100%;
     }
   }
 }
