@@ -73,9 +73,7 @@ if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
 
 if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 	function ucf_news_display_classic( $items, $title, $display_type ) {
-		$fallback_image_id = get_option( 'ucf_news_fallback_image' );
-		$fallback_image = wp_get_attachment_image_src( $fallback_image_id );
-		$fallback_image = $fallback_image[0];
+		$fallback_image = UCF_News_Common::get_fallback_image();
 		ob_start();
 	?>
 		<div class="ucf-news-items">
@@ -83,7 +81,7 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 		foreach( $items as $item ) :
 	?>
 			<div class="ucf-news-item">
-			<?php if ( $item->featured_media !== 0 || $fallback_image_id ) :
+			<?php if ( $item->featured_media !== 0 || $fallback_image ) :
 				if ( $item->featured_media == 0 ) {
 					$image_url = $fallback_image;
 				}  else {
