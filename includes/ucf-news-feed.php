@@ -29,8 +29,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 
 			$query = http_build_query( array(
 				'per_page'   => $args['limit'],
-				'filter'     => $filter,
-				'_embed'     => true
+				'filter'     => $filter
 			) );
 
 			$query = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);

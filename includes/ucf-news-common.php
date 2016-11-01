@@ -81,12 +81,11 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 		foreach( $items as $item ) :
 	?>
 			<div class="ucf-news-item">
-			<?php if ( $item->featured_media !== 0 || $fallback_image ) :
-				if ( $item->featured_media == 0 ) {
+			<?php if ( $item->thumbnail || $fallback_image ) :
+				if ( ! $item->thumbnail ) {
 					$image_url = $fallback_image;
 				}  else {
-					$image = $item->_embedded->{'wp:featuredmedia'}[0];
-					$image_url = $image->media_details->sizes->thumbnail->source_url;
+					$image_url = $item->thumbnail;
 				}
 
 				if ( empty( $image_url ) ) {

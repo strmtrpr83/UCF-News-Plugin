@@ -18,7 +18,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'classic' => 'Classic Layout'
 			);
 
-			$layouts = apply_filters( 'ucf_events_get_layouts', $layouts );
+			$layouts = apply_filters( 'ucf_news_get_layouts', $layouts );
 
 			return $layouts;
 		}
