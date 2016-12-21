@@ -12,7 +12,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 add_action( 'plugins_loaded', function() {
 
-	define( 'UCF_NEWS__PLUGIN_DIR', plugins_url( '/ucf-news/' ) );
+	define( 'UCF_NEWS__PLUGIN_FILE', __FILE__ );
 
 	require_once 'includes/ucf-news-config.php';
 	require_once 'includes/ucf-news-feed.php';
