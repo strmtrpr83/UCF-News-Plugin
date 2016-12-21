@@ -42,6 +42,21 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 			return $retval;
 		}
+
+		public static function get_image_url_or_fallback( $item ) {
+			$img_url = null;
+			$featured_media = $item->_embedded->{'wp:featuredmedia'};
+
+			if ( isset( $featured_media ) && is_array( $featured_media ) ) {
+				$img_obj = $featured_media[0];
+				$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+			}
+			else {
+				$img_url = self::get_fallback_image();
+			}
+
+			return $img_url;
+		}
 	}
 
 if ( ! function_exists( 'ucf_news_display_classic_before' ) ) {
@@ -77,27 +92,17 @@ if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
 
 if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 	function ucf_news_display_classic( $items, $title, $display_type ) {
-		$fallback_image = UCF_News_Common::get_fallback_image();
 		ob_start();
 	?>
 		<div class="ucf-news-items">
 	<?php
 		foreach( $items as $item ) :
+			$item_img = UCF_News_Common::get_image_url_or_fallback( $item );
 	?>
 			<div class="ucf-news-item">
-			<?php if ( $item->thumbnail || $fallback_image ) :
-				if ( ! $item->thumbnail ) {
-					$image_url = $fallback_image;
-				}  else {
-					$image_url = $item->thumbnail;
-				}
-
-				if ( empty( $image_url ) ) {
-					$image_url = $fallback_image;
-				}
-			?>
+			<?php if ( $item_img ): ?>
 				<div class="ucf-news-thumbnail">
-					<img class="ucf-news-thumbnail-image" src="<?php echo $image_url; ?>">
+					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>">
 				</div>
 			<?php endif; ?>
 				<div class="ucf-news-item-title">
