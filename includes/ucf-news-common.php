@@ -104,7 +104,9 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 			</div>
 	<?php
 		endforeach;
-
+	?>
+	</div>
+	<?php
 		echo ob_get_clean();
 	}
 
