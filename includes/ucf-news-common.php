@@ -43,11 +43,11 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			return $retval;
 		}
 
-		public static function get_image_url_or_fallback( $item ) {
+		public static function get_story_image_or_fallback( $item ) {
 			$img_url = null;
-			$featured_media = $item->_embedded->{'wp:featuredmedia'};
+			$featured_media = isset( $item->_embedded->{'wp:featuredmedia'} ) ? $item->_embedded->{'wp:featuredmedia'} : false;
 
-			if ( isset( $featured_media ) && is_array( $featured_media ) ) {
+			if ( is_array( $featured_media ) ) {
 				$img_obj = $featured_media[0];
 				$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
 			}
@@ -56,6 +56,40 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			}
 
 			return $img_url;
+		}
+
+		public static function get_story_terms( $item, $taxonomy ) {
+			$tax_terms     = array();
+			$taxonomy_list = isset( $item->_links->{'wp:term'} ) ? $item->_links->{'wp:term'} : false;
+			$all_terms     = isset( $item->_embedded->{'wp:term'} ) ? $item->_embedded->{'wp:term'} : false;
+			$all_terms_key = false;
+
+			if ( is_array( $taxonomy_list ) && is_array( $all_terms ) ) {
+				// Determine the position in $all_terms that the terms for
+				// $taxonomy are located.  $taxonomy_list contains a list of
+				// taxonomy objects that should be listed in the same order
+				// that groups of their terms are listed in $all_terms.
+				foreach ( $taxonomy_list as $key => $tax_obj ) {
+					if ( $tax_obj->taxonomy == $taxonomy ) {
+						$all_terms_key = $key;
+						break;
+					}
+				}
+
+				if ( $all_terms_key !== false ) {
+					$tax_terms = $all_terms[$all_terms_key];
+				}
+			}
+
+			return $tax_terms;
+		}
+
+		public static function get_story_sections( $item ) {
+			return self::get_story_terms( $item, 'category' );
+		}
+
+		public static function get_story_topics( $item ) {
+			return self::get_story_terms( $item, 'post_tag' );
 		}
 	}
 
@@ -99,7 +133,7 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 		<div class="ucf-news-items">
 	<?php
 		foreach( $items as $item ) :
-			$item_img = UCF_News_Common::get_image_url_or_fallback( $item );
+			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
 	?>
 			<div class="ucf-news-item">
 			<?php if ( $item_img ): ?>
