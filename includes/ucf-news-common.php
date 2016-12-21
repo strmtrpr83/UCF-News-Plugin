@@ -50,6 +50,11 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			if ( is_array( $featured_media ) ) {
 				$img_obj = $featured_media[0];
 				$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+
+				// If the thumbnail isn't defined, just use the fallback image
+				if ( !$img_url ) {
+					$img_url = self::get_fallback_image();
+				}
 			}
 			else {
 				$img_url = self::get_fallback_image();
