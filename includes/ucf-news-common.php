@@ -80,7 +80,9 @@ if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
 				break;
 			case 'default':
 			default:
-				$formatted_title = '<h2 class="ucf-news-title">' . $title . '</h2>';
+				if ( $title ) {
+					$formatted_title = '<h2 class="ucf-news-title">' . $title . '</h2>';
+				}
 				break;
 		}
 
