@@ -38,13 +38,17 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			) );
 
 			ob_start();
-	?>
+
+			if ( $items ):
+		?>
 			<aside class="widget ucf-news-widget">
-	<?php
+		<?php
 			UCF_News_Common::display_news_items( $items, $layout, $title, 'widget' );
-	?>
+		?>
 			</aside>
-	<?php
+		<?php
+			endif;
+
 			echo ob_get_clean();
 		}
 

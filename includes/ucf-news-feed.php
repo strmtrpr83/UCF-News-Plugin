@@ -5,13 +5,34 @@
 
 if ( ! class_exists( 'UCF_News_Feed' ) ) {
 	class UCF_News_Feed {
+		public static function get_json_feed( $feed_url ) {
+			$response = wp_safe_remote_get( $feed_url, array( 'timeout' => 15 ) );
+
+			if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) == 200 ) {
+				$result = json_decode( wp_remote_retrieve_body( $response ) );
+			}
+			else {
+				$result = false;
+			}
+
+			return $result;
+		}
+
+		public static function format_tax_arg( $terms, $tax ) {
+			$terms_filtered = is_array( $terms ) ? array_filter( $terms ) : array();
+
+			return array(
+				$tax . '_name' => $terms_filtered
+			);
+		}
+
 		public static function get_news_items( $args ) {
 			$args = array(
 				'url'        => get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' ),
-				'limit'      => $args['limit'] ? (int) $args['limit'] : 3,
-				'offset'     => $args['offset'] ? (int) $args['offset'] : null,
-				'categories' => $args['sections'] ? explode( ',', $args['sections'] ) : null,
-				'tags'       => $args['topics'] ? explode( ',', $args['topics'] ) : null,
+				'limit'      => isset( $args['limit'] ) ? (int) $args['limit'] : 3,
+				'offset'     => isset( $args['offset'] ) ? (int) $args['offset'] : null,
+				'categories' => isset( $args['sections'] ) ? explode( ',', $args['sections'] ) : null,
+				'tags'       => isset( $args['topics'] ) ? explode( ',', $args['topics'] ) : null,
 			);
 
 			// Empty array of indexes with no value.
@@ -21,9 +42,15 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 				unset( $args[$key] );
 			}
 
-			$categories = self::format_tax_arg( $args['categories'], 'category' );
+			// Set up query params.
+			$categories = $tags = array();
 
-			$tags = self::format_tax_arg( $args['tags'], 'tag' );
+			if ( isset( $args['categories'] ) ) {
+				$categories = self::format_tax_arg( $args['categories'], 'category' );
+			}
+			if ( isset( $args['tags'] ) ) {
+				$tags = self::format_tax_arg( $args['tags'], 'tag' );
+			}
 
 			$filter = array_merge( $categories, $tags );
 
@@ -31,69 +58,26 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 				'per_page'   => $args['limit'],
 				'filter'     => $filter
 			) );
+			$query = preg_replace( '/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query );
 
-			$query = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);
+			// Fetch feed
+			$feed_url = $args['url'] . 'posts?' . $query;
 
-			$req_url = $args['url'] . 'posts?' . $query;
-
-			$opts = array(
-				'http' => array(
-					'timeout' => 15
-				)
-			);
-
-			$context = stream_context_create( $opts );
-
-			$file = file_get_contents( $req_url, false, $context );
-
-			$items = json_decode( $file );
-
-			return $items;
-		}
-
-		public static function format_tax_arg( $terms, $tax ) {
-			return array(
-				$tax . '_name' => array_filter( $terms )
-			);
+			return self::get_json_feed( $feed_url );
 		}
 
 		public static function get_sections( $search ) {
 			$base_url = get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' );
-			$url = $base_url . 'categories/?search=' . $search;
+			$url      = $base_url . 'categories/?search=' . $search;
 
-			$opts = array(
-				'http' => array(
-					'timeout' => 15
-				)
-			);
-
-			$context = stream_context_create( $opts );
-
-			$file = file_get_contents( $url, false, $context );
-
-			$retval = json_decode( $file );
-
-			return $retval;
-
+			return self::get_json_feed( $url );
 		}
 
 		public static function get_topics( $search ) {
 			$base_url = get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' );
-			$url = $base_url . 'tags/?search=' . $search;
+			$url      = $base_url . 'tags/?search=' . $search;
 
-			$opts = array(
-				'http' => array(
-					'timeout' => 15
-				)
-			);
-
-			$context = stream_context_create( $opts );
-
-			$file = file_get_contents( $url, false, $context );
-
-			$retval = json_decode( $file );
-
-			return $retval;
+			return self::get_json_feed( $url );
 		}
 	}
 }
