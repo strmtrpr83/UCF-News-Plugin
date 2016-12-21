@@ -28,13 +28,15 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			$sections =	str_replace( ' ', '', $instance['sections'] );
 			$topics = str_replace( ' ', '', $instance['topics'] );
 			$limit = (int) $instance['limit'];
+			$offset = (int) $instance['offset'];
 			$layout = $instance['layout'];
 
 			$items = UCF_News_Feed::get_news_items( array(
 				'title'    => $title,
 				'sections' => $sections,
 				'topics'   => $topics,
-				'limit'    => $limit
+				'limit'    => $limit,
+				'offset'   => $offset
 			) );
 
 			ob_start();
@@ -60,6 +62,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			$sections = $options['sections'];
 			$topics = $options['topics'];
 			$limit = $options['limit'];
+			$offset = $options['offset'];
 	?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo __( 'Title' ); ?></label>
@@ -84,6 +87,10 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>"><?php echo __( 'Limit results' ); ?></label>
 				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'limit' ) ); ?>" type="number" value="<?php echo esc_attr( $limit ); ?>" >
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'offset' ) ); ?>"><?php echo __( 'Offset results' ); ?></label>
+				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'offset' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'offset' ) ); ?>" type="number" value="<?php echo esc_attr( $offset ); ?>" >
 			</p>
 	<?php
 		}
