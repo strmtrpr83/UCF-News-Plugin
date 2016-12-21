@@ -11,6 +11,8 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 				wp_enqueue_style( 'ucf_news_css', UCF_NEWS__PLUGIN_DIR . 'static/css/ucf-news.min.css', false, false, 'all' );
 			}
 
+			ob_start();
+
 			if ( has_action( 'ucf_news_display_' . $layout . '_before' ) ) {
 				do_action( 'ucf_news_display_' . $layout . '_before', $items, $title, $display_type );
 			}
@@ -26,6 +28,8 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			if ( has_action( 'ucf_news_display_' . $layout . '_after' ) ) {
 				do_action( 'ucf_news_display_' . $layout . '_after', $items, $title, $display_type );
 			}
+
+			return ob_get_clean();
 		}
 
 		public static function get_fallback_image( $size='thumbnail' ) {
