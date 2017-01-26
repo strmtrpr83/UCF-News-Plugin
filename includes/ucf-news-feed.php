@@ -27,7 +27,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 		}
 
 		public static function get_news_items( $args ) {
-			
+
 			$args = array(
 				'url'        => get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' ),
 				'limit'      => isset( $args['limit'] ) ? (int) $args['limit'] : 3,
@@ -47,7 +47,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			$categories = $tags = array();
 
 			if ( isset( $args['categories'] ) ) {
-				$categories = self::format_tax_arg( $args['categories'], 'category' );
+				$categories = self::format_tax_arg( $args['categories'], 'category_name' );
 			}
 			if ( isset( $args['tags'] ) ) {
 				$tags = self::format_tax_arg( $args['tags'], 'tag' );
