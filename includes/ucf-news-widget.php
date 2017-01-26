@@ -45,7 +45,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		?>
 			<aside class="widget ucf-news-widget">
 		<?php
-			UCF_News_Common::display_news_items( $items, $layout, $title, 'widget' );
+			echo UCF_News_Common::display_news_items( $items, $layout, $title, 'widget' );
 		?>
 			</aside>
 		<?php

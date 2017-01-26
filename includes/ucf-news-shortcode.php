@@ -75,8 +75,8 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 			$layout = $attr['layout'];
 
 			$args = array(
-				'sections' => $attr['sections'] ? explode( ',', $attr['sections'] ) : null,
-				'topics'   => $attr['topics'] ? explode( ',', $attr['topics'] ) : null,
+				'sections' => $attr['sections'] ?: null,
+				'topics'   => $attr['topics'] ?: null,
 				'offset'   => $attr['offset'] ? (int) $attr['offset'] : 0,
 				'limit'    => $attr['limit'] ? (int) $attr['limit'] : 3
 			);

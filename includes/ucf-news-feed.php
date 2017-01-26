@@ -22,11 +22,12 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			$terms_filtered = is_array( $terms ) ? array_filter( $terms ) : array();
 
 			return array(
-				$tax . '_name' => $terms_filtered
+				$tax => $terms_filtered
 			);
 		}
 
 		public static function get_news_items( $args ) {
+			
 			$args = array(
 				'url'        => get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' ),
 				'limit'      => isset( $args['limit'] ) ? (int) $args['limit'] : 3,
