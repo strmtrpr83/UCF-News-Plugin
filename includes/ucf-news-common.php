@@ -147,7 +147,7 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 			<div class="ucf-news-item">
 			<?php if ( $item_img ): ?>
 				<div class="ucf-news-thumbnail">
-					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>">
+					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>" alt="">
 				</div>
 			<?php endif; ?>
 				<div class="ucf-news-item-title">
