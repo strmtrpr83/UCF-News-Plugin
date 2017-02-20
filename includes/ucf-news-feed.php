@@ -6,7 +6,7 @@
 if ( ! class_exists( 'UCF_News_Feed' ) ) {
 	class UCF_News_Feed {
 		public static function get_json_feed( $feed_url ) {
-			$response = wp_safe_remote_get( $feed_url, array( 'timeout' => 15 ) );
+			$response = wp_remote_get( $feed_url, array( 'timeout' => 15 ) );
 
 			if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) == 200 ) {
 				$result = json_decode( wp_remote_retrieve_body( $response ) );
