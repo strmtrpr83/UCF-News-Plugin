@@ -28,7 +28,27 @@ TODO
 
 ## Changelog ##
 
-### 1.0 ###
+### 1.0.4 ###
+
+* Bug Fixes:
+  * Updates the way the news feed is pulled to prevent error when accessing external host.
+
+### 1.0.3 ###
+
+* Enhancements: 
+  * Adds empty alt tag to classic layout images for accessibility.
+
+### 1.0.2 ###
+
+* Bug Fixes:
+  * Corrects filter name from category to category_name.
+
+### 1.0.1 ###
+
+* Bug Fixes:
+  * Corrects a bug with sections and topics filters.
+
+### 1.0.0 ###
 * Initial release
 
 
