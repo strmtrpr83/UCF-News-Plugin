@@ -6,7 +6,7 @@
 if ( ! class_exists( 'UCF_News_Feed' ) ) {
 	class UCF_News_Feed {
 		public static function get_json_feed( $feed_url ) {
-			$response = wp_safe_remote_get( $feed_url, array( 'timeout' => 15 ) );
+			$response = wp_remote_get( $feed_url, array( 'timeout' => 15 ) );
 
 			if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) == 200 ) {
 				$result = json_decode( wp_remote_retrieve_body( $response ) );
@@ -19,11 +19,9 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 		}
 
 		public static function format_tax_arg( $terms, $tax ) {
-			$terms_filtered = is_array( $terms ) ? array_filter( $terms ) : array();
+			$terms_filtered = is_array( $terms ) ? array_filter( $terms ) : null;
 
-			return array(
-				$tax => $terms_filtered
-			);
+			return $terms_filtered;
 		}
 
 		public static function get_news_items( $args ) {
@@ -47,21 +45,21 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			$categories = $tags = array();
 
 			if ( isset( $args['categories'] ) ) {
-				$categories = self::format_tax_arg( $args['categories'], 'category_name' );
+				$categories = self::format_tax_arg( $args['categories'], 'category_slugs' );
 			}
 			if ( isset( $args['tags'] ) ) {
-				$tags = self::format_tax_arg( $args['tags'], 'tag' );
+				$tags = self::format_tax_arg( $args['tags'], 'tag_slugs' );
 			}
 
-			$filter = array_merge( $categories, $tags );
-
 			$query = http_build_query( array(
-				'per_page'   => $args['limit'],
-				'offset'     => $args['offset'],
-				'filter'     => $filter,
+				'per_page'       => $args['limit'],
+				'offset'         => $args['offset'],
+				'category_slugs' => $categories,
+				'tag_slugs'      => $tags,
 				'_embed'     => true
 			) );
-			$query = preg_replace( '/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query );
+			//$query = preg_replace( '/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query );
+			$query = preg_replace( '/%5B[0-9]+%5D/simU', '%5B%5D', $query );
 
 			// Fetch feed
 			$feed_url = $args['url'] . 'posts?' . $query;
