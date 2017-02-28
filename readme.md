@@ -28,7 +28,12 @@ TODO
 
 ## Changelog ##
 
-### 1.0.4 ###
+### 1.1.0 ###
+
+* Bug Fixes
+    * Updated to match the new query params available on UCF Today.
+
+### 1.0.4 (Deprecated) ###
 
 * Bug Fixes:
   * Updates the way the news feed is pulled to prevent error when accessing external host.
