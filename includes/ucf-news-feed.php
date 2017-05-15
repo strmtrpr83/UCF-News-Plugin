@@ -25,9 +25,11 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 		}
 
 		public static function get_news_items( $args ) {
+			
+			$url_option = get_option('ucf_news_feed_url');
 
 			$args = array(
-				'url'        => get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' ),
+				'url'        => $url_option ? $url_option : 'https://today.ucf.edu/wp-json/wp/v2/',
 				'limit'      => isset( $args['limit'] ) ? (int) $args['limit'] : 3,
 				'offset'     => isset( $args['offset'] ) ? (int) $args['offset'] : 0,
 				'categories' => isset( $args['sections'] ) ? explode( ',', $args['sections'] ) : null,
