@@ -28,6 +28,11 @@ TODO
 
 ## Changelog ##
 
+### 1.1.1 ###
+
+* Bug Fixes
+    * Make sure UCF_News_Feed::get_news_items() always has a feed_url set, even if the plugin option's value is empty (thanks @jorgedonoso!)
+
 ### 1.1.0 ###
 
 * Bug Fixes
@@ -40,7 +45,7 @@ TODO
 
 ### 1.0.3 ###
 
-* Enhancements: 
+* Enhancements:
   * Adds empty alt tag to classic layout images for accessibility.
 
 ### 1.0.2 ###
