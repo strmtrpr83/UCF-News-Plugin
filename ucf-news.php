@@ -22,6 +22,9 @@ add_action( 'plugins_loaded', function() {
 	require_once 'admin/ucf-news-admin.php';
 	require_once 'admin/ucf-news-api.php';
 
+	require_once 'layouts/ucf-news-classic.php';
+	require_once 'layouts/ucf-news-modern.php';
+
 	add_action( 'init', array( 'UCF_News_Shortcode', 'register_shortcode' ) );
 	add_action( 'admin_init', array( 'UCF_News_Shortcode', 'register_shortcode_interface' ) );
 	add_action( 'admin_menu', array( 'UCF_News_Config', 'add_options_page' ) );
