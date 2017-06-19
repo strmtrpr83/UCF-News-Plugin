@@ -24,7 +24,6 @@ add_action( 'plugins_loaded', function() {
 
 	add_action( 'init', array( 'UCF_News_Shortcode', 'register_shortcode' ) );
 	add_action( 'admin_init', array( 'UCF_News_Shortcode', 'register_shortcode_interface' ) );
-	add_action( 'admin_menu', array( 'UCF_News_Config', 'add_options_page' ) );
 
 } );
 
