@@ -6,7 +6,7 @@
 if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 	class UCF_News_Common {
-		public function display_news_items( $items, $layout, $title, $display_type='default' ) {
+		public function display_news_items( $items, $layout, $title, $perrow, $display_type='default' ) {
 			ob_start();
 
 			if ( has_action( 'ucf_news_display_' . $layout . '_before' ) ) {
@@ -18,7 +18,7 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			}
 
 			if ( has_action( 'ucf_news_display_' . $layout  ) ) {
-				do_action( 'ucf_news_display_' . $layout, $items, $title, $display_type );
+				do_action( 'ucf_news_display_' . $layout, $items, $title, $perrow, $display_type );
 			}
 
 			if ( has_action( 'ucf_news_display_' . $layout . '_after' ) ) {
@@ -45,9 +45,9 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 			if ( is_array( $featured_media ) ) {
 				$img_obj = $featured_media[0];
-				$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+				$img_url = $img_obj->media_details->sizes->feature->source_url;
 
-				// If the thumbnail isn't defined, just use the fallback image
+				// If the feature image isn't defined, use the fallback image
 				if ( !$img_url ) {
 					$img_url = self::get_fallback_image();
 				}

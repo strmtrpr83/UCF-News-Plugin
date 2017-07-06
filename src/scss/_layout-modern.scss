@@ -1,12 +1,13 @@
 .ucf-news.modern {
+
   .ucf-news-item {
     clear: left;
-    margin-left: -15px;
     margin-bottom: 20px;
+    margin-left: -15px;
     padding: 15px;
 
     &:hover {
-      background: #efefef;
+      background: $gray-lighter;
       text-decoration: none !important;
     }
 
@@ -35,19 +36,20 @@
   }
 
   .ucf-news-section-title {
-    background: #fc0;
-    color: #000;
+    background: $ucf-gold;
+    color: $black;
     display: inline-block;
-    padding: 2px 14px;
     margin-bottom: 1rem;
+    padding: 2px 14px;
   }
 
   .ucf-news-item-title {
-    color: #000;
+    color: $black;
     font-weight: 700;
   }
 
   .ucf-news-item-excerpt {
-    color: #000;
+    color: $black;
+    margin-bottom: 0;
   }
 }

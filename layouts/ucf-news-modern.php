@@ -70,3 +70,15 @@ if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 
 	add_action( 'ucf_news_display_modern', 'ucf_news_display_modern', 10, 3 );
 }
+
+if ( ! function_exists( 'ucf_news_display_modern_after' ) ) {
+	function ucf_news_display_modern_after( $items, $title, $display_type ) {
+		ob_start();
+	?>
+		</div>
+	<?php
+		echo ob_get_clean();
+	}
+
+	add_action( 'ucf_news_display_modern_after', 'ucf_news_display_modern_after', 10, 3 );
+}
