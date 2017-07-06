@@ -6,9 +6,6 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 	class UCF_News_Config {
 		public static
 			$default_options = array(
-				'feed_url'       => 'https://today.ucf.edu/wp-json/wp/v2/',
-				'include_css'    => false,
-				'fallback_image' => '',
 				'title'          => 'News',
 				'layout'         => 'classic',
 				'sections'       => '',
