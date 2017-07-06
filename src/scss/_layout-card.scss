@@ -1,6 +1,35 @@
 .ucf-news.card-layout {
 
   .ucf-news-thumbnail-image {
-    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  @media (min-width: 576px) {
+
+    .card-deck {
+      display: flex;
+      flex-flow: row wrap;
+
+      .card:not(:last-child) {
+        margin-right: 15px;
+      }
+
+      .card {
+        display: flex;
+        flex: 1 0 0;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .card {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    position: relative;
   }
 }

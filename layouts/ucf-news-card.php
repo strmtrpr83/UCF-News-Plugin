@@ -51,7 +51,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 		?>
 		<div class="card mb-4">
 			<a href="<?php echo $item->link; ?>" class="text-secondary">
-				<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image" alt="<?php echo $item->title->rendered; ?>">
+				<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image img-fluid" alt="<?php echo $item->title->rendered; ?>">
 				<div class="card-block">
 					<h3 class="card-title h6 mt-0 font-weight-semi-bold"><?php echo $item->title->rendered; ?></h3>
 					<p class="card-text font-weight-normal font-italic text-muted"><?php echo $date ?></p>
