@@ -28,6 +28,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			$sections =	str_replace( ' ', '', $instance['sections'] );
 			$topics = str_replace( ' ', '', $instance['topics'] );
 			$limit = (int) $instance['limit'];
+			$perrow = (int) $instance['perrow'];
 			$offset = (int) $instance['offset'];
 			$layout = $instance['layout'];
 
@@ -36,7 +37,8 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 				'sections' => $sections,
 				'topics'   => $topics,
 				'limit'    => $limit,
-				'offset'   => $offset
+				'offset'   => $offset,
+				'perrow'   => $perrow
 			) );
 
 			ob_start();
@@ -45,7 +47,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		?>
 			<aside class="widget ucf-news-widget">
 		<?php
-			echo UCF_News_Common::display_news_items( $items, $layout, $title, 'widget' );
+			echo UCF_News_Common::display_news_items( $items, $layout, $title, $perrow, 'widget' );
 		?>
 			</aside>
 		<?php
@@ -63,6 +65,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			$topics = $options['topics'];
 			$limit = $options['limit'];
 			$offset = $options['offset'];
+			$perrow = $options['perrow'];
 	?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo __( 'Title' ); ?></label>
@@ -87,6 +90,10 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>"><?php echo __( 'Limit results' ); ?></label>
 				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'limit' ) ); ?>" type="number" value="<?php echo esc_attr( $limit ); ?>" >
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'perrow' ) ); ?>"><?php echo __( 'No. of items per row' ); ?></label>
+				<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'perrow' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'perrow' ) ); ?>" type="number" value="<?php echo esc_attr( $perrow ); ?>" >
 			</p>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'offset' ) ); ?>"><?php echo __( 'Offset results' ); ?></label>
