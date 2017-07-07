@@ -6,7 +6,7 @@
 if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 	class UCF_News_Common {
-		public function display_news_items( $items, $layout, $title, $display_type='default' ) {
+		public function display_news_items( $items, $layout, $title, $per_row, $display_type='default' ) {
 			ob_start();
 
 			if ( has_action( 'ucf_news_display_' . $layout . '_before' ) ) {
@@ -18,7 +18,7 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			}
 
 			if ( has_action( 'ucf_news_display_' . $layout  ) ) {
-				do_action( 'ucf_news_display_' . $layout, $items, $title, $display_type );
+				do_action( 'ucf_news_display_' . $layout, $items, $title, $per_row, $display_type );
 			}
 
 			if ( has_action( 'ucf_news_display_' . $layout . '_after' ) ) {
@@ -45,9 +45,9 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 			if ( is_array( $featured_media ) ) {
 				$img_obj = $featured_media[0];
-				$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+				$img_url = $img_obj->media_details->sizes->feature->source_url;
 
-				// If the thumbnail isn't defined, just use the fallback image
+				// If the feature image isn't defined, use the fallback image
 				if ( !$img_url ) {
 					$img_url = self::get_fallback_image();
 				}
@@ -84,11 +84,11 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 			return $tax_terms;
 		}
-		
+
 		public static function add_css() {
 			if ( get_option( 'ucf_news_include_css' ) ) {
 				wp_enqueue_style( 'ucf_news_css', plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE ), false, false, 'all' );
-			}	
+			}
 		}
 
 		public static function get_story_sections( $item ) {
@@ -99,85 +99,8 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			return self::get_story_terms( $item, 'post_tag' );
 		}
 	}
-	
+
 	add_action( 'wp_enqueue_scripts', array( 'UCF_News_Common', 'add_css' ) );
-
-if ( ! function_exists( 'ucf_news_display_classic_before' ) ) {
-	function ucf_news_display_classic_before( $items, $title, $display_type ) {
-		ob_start();
-	?>
-		<div class="ucf-news classic">
-	<?php
-		echo ob_get_clean();
-	}
-
-	add_action( 'ucf_news_display_classic_before', 'ucf_news_display_classic_before', 10, 3 );
-}
-
-if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
-	function ucf_news_display_classic_title( $item, $title, $display_type) {
-		$formatted_title = $title;
-
-		switch( $display_type ) {
-			case 'widget':
-				break;
-			case 'default':
-			default:
-				if ( $title ) {
-					$formatted_title = '<h2 class="ucf-news-title">' . $title . '</h2>';
-				}
-				break;
-		}
-
-		echo $formatted_title;
-	}
-
-	add_action( 'ucf_news_display_classic_title', 'ucf_news_display_classic_title', 10, 3 );
-}
-
-if ( ! function_exists( 'ucf_news_display_classic' ) ) {
-	function ucf_news_display_classic( $items, $title, $display_type ) {
-		ob_start();
-	?>
-		<div class="ucf-news-items">
-	<?php
-		foreach( $items as $item ) :
-			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
-	?>
-			<div class="ucf-news-item">
-			<?php if ( $item_img ): ?>
-				<div class="ucf-news-thumbnail">
-					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>" alt="">
-				</div>
-			<?php endif; ?>
-				<div class="ucf-news-item-title">
-					<a href="<?php echo $item->link; ?>">
-						<?php echo $item->title->rendered; ?>
-					</a>
-				</div>
-			</div>
-	<?php
-		endforeach;
-	?>
-	</div>
-	<?php
-		echo ob_get_clean();
-	}
-
-	add_action( 'ucf_news_display_classic', 'ucf_news_display_classic', 10, 3 );
-}
-
-if ( ! function_exists( 'ucf_news_display_classic_after' ) ) {
-	function ucf_news_display_classic_after( $items, $title, $display_type ) {
-		ob_start();
-	?>
-		</div>
-	<?php
-		echo ob_get_clean();
-	}
-
-	add_action( 'ucf_news_display_classic_after', 'ucf_news_display_classic_after', 10, 3 );
-}
 
 }
 ?>

@@ -6,16 +6,19 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 	class UCF_News_Config {
 		public static
 			$default_options = array(
-				'title'    => 'News',
-				'layout'   => 'classic',
-				'sections' => '',
-				'topics'   => '',
-				'limit'    => 3
+				'title'     => 'News',
+				'layout'    => 'classic',
+				'sections'  => '',
+				'topics'    => '',
+				'limit'     => 3,
+				'per_row'   => 3
 			);
 
 		public static function get_layouts() {
 			$layouts = array(
-				'classic' => 'Classic Layout'
+				'classic' => 'Classic Layout',
+				'modern'  => 'Modern Layout',
+				'card'    => 'Card Layout'
 			);
 
 			$layouts = apply_filters( 'ucf_news_get_layouts', $layouts );
@@ -50,6 +53,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			foreach( $list as $key => $val ) {
 				switch( $key ) {
 					case 'limit':
+					case 'per_row':
 						$list[$key] = intval( $val );
 						break;
 					default:
@@ -99,31 +103,33 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 
 	?>
 	<div class="wrap">
-	<h1>UCF News Settings</h1>
-	<form method="post" action="options.php">
-		<?php settings_fields( 'ucf-news-group' ); ?>
-		<?php do_settings_sections( 'ucf-news-groups' ); ?>
-		<table class="form-table">
-			<tr valign="top">
-				<th scope="row">UCF News Feed URL</th>
-				<td><input type="text" name="ucf_news_feed_url" value="<?php echo esc_attr( $ucf_news_feed_url ); ?>"></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Include CSS</th>
-				<td><input type="checkbox" name="ucf_news_include_css" <?php echo ( $ucf_news_include_css === 'on' ) ? 'checked' : ''; ?>>
-					Include Default CSS
-				</input></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Fallback Image</th>
-				<td>
-					<img class="ucf_news_fallback_image_preview" src="<?php echo $ucf_news_fallback_image_src; ?>" height="100" width="100">
-					<input class="ucf_news_fallback_image" type="hidden" name="ucf_news_fallback_image" value="<?php echo $ucf_news_fallback_image; ?>">
-					<a href="#" class="ucf_news_fallback_image_upload">Upload</a>
-				</td>
-			</tr>
-		<?php submit_button(); ?>
-	</form>
+		<h1>UCF News Settings</h1>
+		<form method="post" action="options.php">
+			<?php settings_fields( 'ucf-news-group' ); ?>
+			<?php do_settings_sections( 'ucf-news-groups' ); ?>
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row">UCF News Feed URL</th>
+					<td><input type="text" name="ucf_news_feed_url" value="<?php echo esc_attr( $ucf_news_feed_url ); ?>"></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Include CSS</th>
+					<td><input type="checkbox" name="ucf_news_include_css" <?php echo ( $ucf_news_include_css === 'on' ) ? 'checked' : ''; ?>>
+						Include Default CSS
+					</input></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Fallback Image</th>
+					<td>
+						<img class="ucf_news_fallback_image_preview" src="<?php echo $ucf_news_fallback_image_src; ?>" height="100" width="100">
+						<input class="ucf_news_fallback_image" type="hidden" name="ucf_news_fallback_image" value="<?php echo $ucf_news_fallback_image; ?>">
+						<a href="#" class="ucf_news_fallback_image_upload">Upload</a>
+					</td>
+				</tr>
+			</table>
+			<?php submit_button(); ?>
+		</form>
+	</div>
 	<?php
 		}
 	}
