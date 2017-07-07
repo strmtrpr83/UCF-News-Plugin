@@ -40,22 +40,23 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 		if ( ! is_array( $items ) ) { $items = array( $items ); }
 		ob_start();
 
-		echo '<div class="ucf-news-card-deck card-deck">';
+		echo '<div class="ucf-news-card-deck">';
 
 		foreach( $items as $index=>$item ) :
+		$date = date("M d",strtotime($item->date));
 		$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
 	?>
 		<?php
 			if( $index !== 0 && ( $index % $per_row ) === 0 ) {
-				echo '</div><div class="ucf-news-card-deck card-deck">';
+				echo '</div><div class="ucf-news-card-deck">';
 			}
 		?>
-		<div class="ucf-news-card card mb-4">
-			<a href="<?php echo $item->link; ?>" class="text-secondary">
-				<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image img-fluid" alt="<?php echo $item->title->rendered; ?>">
-				<div class="ucf-news-card-block card-block">
-					<h3 class="card-title h6 mt-0 font-weight-semi-bold"><?php echo $item->title->rendered; ?></h3>
-					<p class="card-text font-weight-normal font-italic text-muted"><?php echo $date; ?></p>
+		<div class="ucf-news-card">
+			<a href="<?php echo $item->link; ?>">
+				<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image" alt="<?php echo $item->title->rendered; ?>">
+				<div class="ucf-news-card-block">
+					<h3 class="ucf-news-card-title"><?php echo $item->title->rendered; ?></h3>
+					<p class="ucf-news-card-text"><?php echo $date; ?></p>
 				</div>
 			</a>
 		</div>
