@@ -53,10 +53,8 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			foreach( $list as $key => $val ) {
 				switch( $key ) {
 					case 'limit':
-						$list[$key] = intval( $val );
-						break;
 					case 'per_row':
-						$per_row[$key] = intval( $val );
+						$list[$key] = intval( $val );
 						break;
 					default:
 						break;

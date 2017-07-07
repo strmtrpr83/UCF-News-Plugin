@@ -67,7 +67,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 		echo ob_get_clean();
 	}
 
-	add_action( 'ucf_news_display_card', 'ucf_news_display_card', 10, 3, 3 );
+	add_action( 'ucf_news_display_card', 'ucf_news_display_card', 10, 4 );
 }
 
 if ( ! function_exists( 'ucf_news_display_card_after' ) ) {
