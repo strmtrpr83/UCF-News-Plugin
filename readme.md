@@ -28,14 +28,19 @@ TODO
 
 ## Changelog ##
 
+### 1.1.2 ###
+
+* Enhancements:
+    * Added modern and card layouts.
+
 ### 1.1.1 ###
 
-* Bug Fixes
+* Bug Fixes:
     * Make sure UCF_News_Feed::get_news_items() always has a feed_url set, even if the plugin option's value is empty (thanks @jorgedonoso!)
 
 ### 1.1.0 ###
 
-* Bug Fixes
+* Bug Fixes:
     * Updated to match the new query params available on UCF Today.
 
 ### 1.0.4 (Deprecated) ###
