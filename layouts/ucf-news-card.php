@@ -36,26 +36,26 @@ if ( ! function_exists( 'ucf_news_display_card_title' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_card' ) ) {
-	function ucf_news_display_card( $items, $title, $perrow, $display_type ) {
+	function ucf_news_display_card( $items, $title, $per_row, $display_type ) {
 		if ( ! is_array( $items ) ) { $items = array( $items ); }
 		ob_start();
 
-		echo '<div class="card-deck">';
+		echo '<div class="ucf-news-card-deck card-deck">';
 
 		foreach( $items as $index=>$item ) :
 		$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
 	?>
 		<?php
-			if( $index != 0 && ( $index % $perrow ) == 0 ) {
-				echo '</div><div class="card-deck">';
+			if( $index !== 0 && ( $index % $per_row ) === 0 ) {
+				echo '</div><div class="ucf-news-card-deck card-deck">';
 			}
 		?>
-		<div class="card mb-4">
+		<div class="ucf-news-card card mb-4">
 			<a href="<?php echo $item->link; ?>" class="text-secondary">
 				<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image img-fluid" alt="<?php echo $item->title->rendered; ?>">
-				<div class="card-block">
+				<div class="ucf-news-card-block card-block">
 					<h3 class="card-title h6 mt-0 font-weight-semi-bold"><?php echo $item->title->rendered; ?></h3>
-					<p class="card-text font-weight-normal font-italic text-muted"><?php echo $date ?></p>
+					<p class="card-text font-weight-normal font-italic text-muted"><?php echo $date; ?></p>
 				</div>
 			</a>
 		</div>
@@ -67,7 +67,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 		echo ob_get_clean();
 	}
 
-	add_action( 'ucf_news_display_card', 'ucf_news_display_card', 10, 3 );
+	add_action( 'ucf_news_display_card', 'ucf_news_display_card', 10, 3, 3 );
 }
 
 if ( ! function_exists( 'ucf_news_display_card_after' ) ) {

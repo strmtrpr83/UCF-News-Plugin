@@ -50,8 +50,8 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 					),
 					array(
 						'name'      => 'Number of News Items Per Row',
-						'id'        => 'perrow',
-						'help_text' => 'The number of news items to show per row',
+						'id'        => 'per_row',
+						'help_text' => 'The number of news items to show per row (for card layout only)',
 						'type'      => 'number',
 						'default'   => '3'
 					)
@@ -76,12 +76,12 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 				'topics'    => '',
 				'offset'    => 0,
 				'limit'     => 3,
-				'perrow'    => 3
+				'per_row'    => 3
 			), $attr );
 
 			$title = $attr['title'];
 			$layout = $attr['layout'];
-			$perrow = $attr['perrow'];
+			$per_row = $attr['per_row'];
 
 			$args = array(
 				'sections' => $attr['sections'] ?: null,
@@ -95,7 +95,7 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 			ob_start();
 
 			if ( $items ) {
-				echo UCF_News_Common::display_news_items( $items, $layout, $title, $perrow, 'default' );
+				echo UCF_News_Common::display_news_items( $items, $layout, $title, $per_row, 'default' );
 			}
 
 			return ob_get_clean();

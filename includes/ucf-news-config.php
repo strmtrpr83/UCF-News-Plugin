@@ -6,19 +6,19 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 	class UCF_News_Config {
 		public static
 			$default_options = array(
-				'title'          => 'News',
-				'layout'         => 'classic',
-				'sections'       => '',
-				'topics'         => '',
-				'limit'          => 3,
-				'perrow'         => 3
+				'title'     => 'News',
+				'layout'    => 'classic',
+				'sections'  => '',
+				'topics'    => '',
+				'limit'     => 3,
+				'per_row'   => 3
 			);
 
 		public static function get_layouts() {
 			$layouts = array(
 				'classic' => 'Classic Layout',
-				'modern' => 'Modern Layout',
-				'card' => 'Card Layout'
+				'modern'  => 'Modern Layout',
+				'card'    => 'Card Layout'
 			);
 
 			$layouts = apply_filters( 'ucf_news_get_layouts', $layouts );
@@ -54,6 +54,9 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				switch( $key ) {
 					case 'limit':
 						$list[$key] = intval( $val );
+						break;
+					case 'per_row':
+						$per_row[$key] = intval( $val );
 						break;
 					default:
 						break;
