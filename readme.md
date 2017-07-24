@@ -28,6 +28,11 @@ TODO
 
 ## Changelog ##
 
+### 1.1.3 ###
+
+* Enhancements:
+    * Updated mobile styles for card layouts.
+
 ### 1.1.2 ###
 
 * Enhancements:
@@ -80,8 +85,6 @@ None
 ## Development & Contributing ##
 
 TODO
-
-NOTE: this plugin's readme.md file is automatically generated.  Please only make modifications to the readme.txt file, and make sure the `gulp readme` command has been run before committing readme changes.
 
 ### Wishlist/TODOs ###
 * Convert customizer options to unique plugin options page
