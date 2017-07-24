@@ -13,11 +13,11 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 ### Manual Installation ###
 1. Upload the plugin files (unzipped) to the `/wp-content/plugins` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the "Plugins" screen in WordPress
-3. Configure plugin settings from the WordPress admin under "TODO".
+3. Configure plugin settings from the WordPress admin under "UCF News".
 
 ### WP CLI Installation ###
 1. `$ wp plugin install --activate https://github.com/UCF/UCF-News-Plugin/archive/master.zip`.  See [WP-CLI Docs](http://wp-cli.org/commands/plugin/install/) for more command options.
-2. Configure plugin settings from the WordPress admin under "TODO".
+2. Configure plugin settings from the WordPress admin under "UCF News".
 
 
 ## Frequently Asked Questions ##
@@ -87,8 +87,6 @@ None
 TODO
 
 ### Wishlist/TODOs ###
-* Convert customizer options to unique plugin options page
 * Add per-display_type hooks for modifying news list titles (instead of forcing developers to re-write all display_type use-cases in `ucf_news_display_classic_before` action)
-* Complete shortcode interface registration (need to complete shortcode wysiwyg interface plugin first)
 * Add rich snippet support, or remove references to rich snippets if this isn't desired
 * Update readme TODOs
