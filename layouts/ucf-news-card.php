@@ -52,7 +52,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 			}
 		?>
 		<div class="ucf-news-card">
-			<a href="<?php echo $item->link; ?>">
+			<a class="ucf-news-card-link" href="<?php echo $item->link; ?>">
 				<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image" alt="<?php echo $item->title->rendered; ?>">
 				<div class="ucf-news-card-block">
 					<h3 class="ucf-news-card-title"><?php echo $item->title->rendered; ?></h3>
