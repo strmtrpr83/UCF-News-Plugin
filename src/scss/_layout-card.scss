@@ -2,21 +2,30 @@
 
   .ucf-news-thumbnail-image {
     height: auto;
-    max-width: 100%;
+    width: 100%;
   }
 
   .ucf-news-card-title {
-    font-size: 1rem;
+    font-size: .9rem;
     font-weight: 500;
     margin-bottom: 0;
     padding: .8rem;
+
+    @media (min-width: 1200px) {
+      font-size: 1rem;
+    }
   }
 
   .ucf-news-card-text {
     color: $gray;
+    font-size: .75rem;
     font-style: italic;
     font-weight: normal;
     padding: 0 .8rem;
+
+    @media (min-width: 1200px) {
+      font-size: .9rem;
+    }
   }
 
   @media (min-width: 576px) {
@@ -45,6 +54,12 @@
     flex-direction: column;
     margin-bottom: 1.5rem;
     position: relative;
+
+    @media (max-width: 575px) {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 320px;
+    }
 
     a {
       color: $black;
