@@ -24,9 +24,16 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			return $terms_filtered;
 		}
 
+		public static function non_empty_allow_zero( $arg ) {
+			return !(
+				is_array( $arg ) && empty( $arg )
+				|| is_null( $arg )
+				|| is_string( $arg ) && empty( $arg )
+			);
+		}
+
 		public static function get_news_items( $args ) {
-			
-			$url_option = get_option('ucf_news_feed_url');
+			$url_option = get_option( 'ucf_news_feed_url' );
 
 			$args = array(
 				'url'        => $url_option ? $url_option : 'https://today.ucf.edu/wp-json/wp/v2/',
@@ -37,11 +44,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			);
 
 			// Empty array of indexes with no value.
-			$keys = array_keys( $args, NULL );
-
-			foreach( $keys as $key ) {
-				unset( $args[$key] );
-			}
+			$args = array_filter( $args, array( 'UCF_News_Feed', 'non_empty_allow_zero' ) );
 
 			// Set up query params.
 			$categories = $tags = array();
