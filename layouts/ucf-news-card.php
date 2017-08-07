@@ -8,10 +8,10 @@ if ( ! function_exists( 'ucf_news_display_card_before' ) ) {
 	?>
 		<div class="ucf-news card-layout">
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 
-	add_action( 'ucf_news_display_card_before', 'ucf_news_display_card_before', 10, 3 );
+	add_filter( 'ucf_news_display_card_before', 'ucf_news_display_card_before', 10, 3 );
 }
 
 if ( ! function_exists( 'ucf_news_display_card_title' ) ) {
@@ -29,10 +29,10 @@ if ( ! function_exists( 'ucf_news_display_card_title' ) ) {
 				break;
 		}
 
-		echo $formatted_title;
+		return $formatted_title;
 	}
 
-	add_action( 'ucf_news_display_card_title', 'ucf_news_display_card_title', 10, 3 );
+	add_filter( 'ucf_news_display_card_title', 'ucf_news_display_card_title', 10, 3 );
 }
 
 if ( ! function_exists( 'ucf_news_display_card' ) ) {
@@ -65,20 +65,20 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 
 		echo '</div>';
 
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 
-	add_action( 'ucf_news_display_card', 'ucf_news_display_card', 10, 4 );
+	add_filter( 'ucf_news_display_card', 'ucf_news_display_card', 10, 4 );
 }
 
 if ( ! function_exists( 'ucf_news_display_card_after' ) ) {
-	function ucf_news_display_card_after( $items, $title, $display_type ) {
+	function ucf_news_display_card_after( $content, $items, $title, $display_type ) {
 		ob_start();
 	?>
 		</div>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 
-	add_action( 'ucf_news_display_card_after', 'ucf_news_display_card_after', 10, 3 );
+	add_filter( 'ucf_news_display_card_after', 'ucf_news_display_card_after', 10, 3 );
 }
