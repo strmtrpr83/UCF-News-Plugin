@@ -10,21 +10,21 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			ob_start();
 
 			// Before
-			$layout_before = ucf_news_display_classic_before( $items, $title, $display_type );
+			$layout_before = ucf_news_display_classic_before( '', $items, $title, $display_type );
 			if ( has_filter( 'ucf_news_display_' . $layout . '_before' ) ) {
 				$layout_before = apply_filters( 'ucf_news_display_' . $layout . '_before', $layout_before, $items, $title, $display_type );
 			}
 			echo $layout_before;
 
 			// Title
-			$layout_title = ucf_news_display_classic_title( $items, $title, $display_type );
+			$layout_title = ucf_news_display_classic_title( '', $items, $title, $display_type );
 			if ( has_filter( 'ucf_news_display_' . $layout . '_title' ) ) {
 				$layout_title = apply_filters( 'ucf_news_display_' . $layout . '_title', $layout_title, $items, $title, $display_type );
 			}
 			echo $layout_title;
 
 			// Main content/loop
-			$layout_content = ucf_news_display_classic( $items, $title, $display_type );
+			$layout_content = ucf_news_display_classic( '', $items, $title, $display_type );
 			if ( has_filter( 'ucf_news_display_' . $layout ) ) {
 				// Special exception for card layout, which requires 4 args
 				if ( $layout === 'card' ) {
@@ -37,7 +37,7 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			echo $layout_content;
 
 			// After
-			$layout_after = ucf_news_display_classic_after( $items, $title, $display_type );
+			$layout_after = ucf_news_display_classic_after( '', $items, $title, $display_type );
 			if ( has_filter( 'ucf_news_display_' . $layout . '_after' ) ) {
 				$layout_after = apply_filters( 'ucf_news_display_' . $layout . '_after', $layout_after, $items, $title, $display_type );
 			}
