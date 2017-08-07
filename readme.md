@@ -28,6 +28,12 @@ TODO
 
 ## Changelog ##
 
+### 1.1.4 ###
+
+* Bug Fixes:
+    * Fixed `display_news_items()` in `UCF_News_Common` not being declared as a static method
+    * Updated filtering of options in `UCF_News_Feed::get_news_items()` to allow 0 values, fixing undefined index notices in some cases.
+
 ### 1.1.3 ###
 
 * Enhancements:
