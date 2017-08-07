@@ -3,7 +3,7 @@
  * The default functions for the modern layout
  **/
 if ( ! function_exists( 'ucf_news_display_modern_before' ) ) {
-	function ucf_news_display_modern_before( $content, $items, $title, $display_type ) {
+	function ucf_news_display_modern_before( $content, $items, $args, $display_type ) {
 		ob_start();
 	?>
 		<div class="ucf-news modern">
@@ -15,16 +15,16 @@ if ( ! function_exists( 'ucf_news_display_modern_before' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_modern_title' ) ) {
-	function ucf_news_display_modern_title( $content, $item, $title, $display_type ) {
-		$formatted_title = $title;
+	function ucf_news_display_modern_title( $content, $items, $args, $display_type ) {
+		$formatted_title = $args['title'];
 
 		switch( $display_type ) {
 			case 'widget':
 				break;
 			case 'default':
 			default:
-				if ( $title ) {
-					$formatted_title = '<h2 class="ucf-news-title">' . $title . '</h2>';
+				if ( $formatted_title ) {
+					$formatted_title = '<h2 class="ucf-news-title">' . $formatted_title . '</h2>';
 				}
 				break;
 		}
@@ -36,14 +36,14 @@ if ( ! function_exists( 'ucf_news_display_modern_title' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_modern' ) ) {
-	function ucf_news_display_modern( $content, $items, $title, $display_type ) {
+	function ucf_news_display_modern( $content, $items, $args, $display_type ) {
 		if ( ! is_array( $items ) ) { $items = array( $items ); }
 		ob_start();
 
 		foreach( $items as $item ) :
-		$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
-		$sections = UCF_News_Common::get_story_sections( $item );
-		$section = $sections[0];
+			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+			$sections = UCF_News_Common::get_story_sections( $item );
+			$section = $sections[0];
 	?>
 		<div class="ucf-news-item">
 			<a href="<?php echo $item->link; ?>">
@@ -73,7 +73,7 @@ if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_modern_after' ) ) {
-	function ucf_news_display_modern_after( $content, $items, $title, $display_type ) {
+	function ucf_news_display_modern_after( $content, $items, $args, $display_type ) {
 		ob_start();
 	?>
 		</div>

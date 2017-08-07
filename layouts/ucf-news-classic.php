@@ -3,7 +3,7 @@
  * The default functions for the classic layout
  **/
 if ( ! function_exists( 'ucf_news_display_classic_before' ) ) {
-	function ucf_news_display_classic_before( $content, $items, $title, $display_type ) {
+	function ucf_news_display_classic_before( $content, $items, $args, $display_type ) {
 		ob_start();
 	?>
 		<div class="ucf-news classic">
@@ -15,16 +15,16 @@ if ( ! function_exists( 'ucf_news_display_classic_before' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
-	function ucf_news_display_classic_title( $content, $items, $title, $display_type ) {
-		$formatted_title = $title;
+	function ucf_news_display_classic_title( $content, $items, $args, $display_type ) {
+		$formatted_title = $args['title'];
 
 		switch( $display_type ) {
 			case 'widget':
 				break;
 			case 'default':
 			default:
-				if ( $title ) {
-					$formatted_title = '<h2 class="ucf-news-title">' . $title . '</h2>';
+				if ( $formatted_title ) {
+					$formatted_title = '<h2 class="ucf-news-title">' . $formatted_title . '</h2>';
 				}
 				break;
 		}
@@ -36,7 +36,7 @@ if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_classic' ) ) {
-	function ucf_news_display_classic( $content, $items, $title, $display_type ) {
+	function ucf_news_display_classic( $content, $items, $args, $display_type ) {
 		if ( ! is_array( $items ) ) { $items = array( $items ); }
 		ob_start();
 	?>
@@ -69,7 +69,7 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_classic_after' ) ) {
-	function ucf_news_display_classic_after( $content, $items, $title, $display_type ) {
+	function ucf_news_display_classic_after( $content, $items, $args, $display_type ) {
 		ob_start();
 	?>
 		</div>
