@@ -6,24 +6,36 @@
 if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 	class UCF_News_Common {
-		public static function display_news_items( $items, $layout, $title, $per_row, $display_type='default' ) {
+		public static function display_news_items( $items, $layout, $args, $display_type='default' ) {
 			ob_start();
 
-			if ( has_action( 'ucf_news_display_' . $layout . '_before' ) ) {
-				do_action( 'ucf_news_display_' . $layout . '_before', $items, $title, $display_type );
+			// Before
+			$layout_before = ucf_news_display_classic_before( '', $items, $args, $display_type );
+			if ( has_filter( 'ucf_news_display_' . $layout . '_before' ) ) {
+				$layout_before = apply_filters( 'ucf_news_display_' . $layout . '_before', $layout_before, $items, $args, $display_type );
 			}
+			echo $layout_before;
 
-			if ( has_action( 'ucf_news_display_' . $layout . '_title' ) ) {
-				do_action( 'ucf_news_display_' . $layout . '_title', $items, $title, $display_type );
+			// Title
+			$layout_title = ucf_news_display_classic_title( '', $items, $args, $display_type );
+			if ( has_filter( 'ucf_news_display_' . $layout . '_title' ) ) {
+				$layout_title = apply_filters( 'ucf_news_display_' . $layout . '_title', $layout_title, $items, $args, $display_type );
 			}
+			echo $layout_title;
 
-			if ( has_action( 'ucf_news_display_' . $layout  ) ) {
-				do_action( 'ucf_news_display_' . $layout, $items, $title, $per_row, $display_type );
+			// Main content/loop
+			$layout_content = ucf_news_display_classic( '', $items, $args, $display_type );
+			if ( has_filter( 'ucf_news_display_' . $layout ) ) {
+				$layout_content = apply_filters( 'ucf_news_display_' . $layout, $layout_content, $items, $args, $display_type );
 			}
+			echo $layout_content;
 
-			if ( has_action( 'ucf_news_display_' . $layout . '_after' ) ) {
-				do_action( 'ucf_news_display_' . $layout . '_after', $items, $title, $display_type );
+			// After
+			$layout_after = ucf_news_display_classic_after( '', $items, $args, $display_type );
+			if ( has_filter( 'ucf_news_display_' . $layout . '_after' ) ) {
+				$layout_after = apply_filters( 'ucf_news_display_' . $layout . '_after', $layout_after, $items, $args, $display_type );
 			}
+			echo $layout_after;
 
 			return ob_get_clean();
 		}
