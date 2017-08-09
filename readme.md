@@ -20,13 +20,11 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 2. Configure plugin settings from the WordPress admin under "UCF News".
 
 
-## Frequently Asked Questions ##
-
-TODO
-
-
-
 ## Changelog ##
+
+### 2.0.0 ###
+* Enhancements:
+    * Updated `UCF_News_Common::display_news_items()` to render layout parts using filters instead of actions.  Please note this change is not backward-compatible with layouts registered using hooks provided by older versions of the plugin.
 
 ### 1.1.4 ###
 
@@ -91,8 +89,3 @@ None
 ## Development & Contributing ##
 
 TODO
-
-### Wishlist/TODOs ###
-* Add per-display_type hooks for modifying news list titles (instead of forcing developers to re-write all display_type use-cases in `ucf_news_display_classic_before` action)
-* Add rich snippet support, or remove references to rich snippets if this isn't desired
-* Update readme TODOs

@@ -32,14 +32,16 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 			$offset = (int) $instance['offset'];
 			$layout = $instance['layout'];
 
-			$items = UCF_News_Feed::get_news_items( array(
+			$items_args = array(
 				'title'    => $title,
 				'sections' => $sections,
 				'topics'   => $topics,
 				'limit'    => $limit,
 				'offset'   => $offset,
-				'per_row'   => $per_row
-			) );
+				'per_row'  => $per_row
+			);
+
+			$items = UCF_News_Feed::get_news_items( $items_args );
 
 			ob_start();
 
@@ -47,7 +49,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		?>
 			<aside class="widget ucf-news-widget">
 		<?php
-			echo UCF_News_Common::display_news_items( $items, $layout, $title, $per_row, 'widget' );
+			echo UCF_News_Common::display_news_items( $items, $layout, $items_args, 'widget' );
 		?>
 			</aside>
 		<?php
