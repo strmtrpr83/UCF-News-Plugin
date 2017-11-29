@@ -73,7 +73,7 @@ if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 		return ob_get_clean();
 	}
 
-	add_filter( 'ucf_news_display_modern', 'ucf_news_display_modern', 10, 4 );
+	add_filter( 'ucf_news_display_modern', 'ucf_news_display_modern', 10, 5 );
 }
 
 if ( ! function_exists( 'ucf_news_display_modern_after' ) ) {
