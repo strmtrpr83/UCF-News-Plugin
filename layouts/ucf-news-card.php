@@ -36,13 +36,15 @@ if ( ! function_exists( 'ucf_news_display_card_title' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_card' ) ) {
-	function ucf_news_display_card( $content, $items, $args, $display_type ) {
+	function ucf_news_display_card( $content, $items, $args, $display_type, $fallback_message='' ) {
 		if ( ! is_array( $items ) ) { $items = array( $items ); }
 		$per_row = $args['per_row'];
 
 		ob_start();
 
 		echo '<div class="ucf-news-card-deck">';
+
+	if ( count( $items ) === 0 ) : echo $fallback_message; else :
 
 		foreach ( $items as $index=>$item ) :
 			$date = date( "M d", strtotime( $item->date ) );
@@ -65,12 +67,14 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 	<?php
 		endforeach;
 
+	endif; // End if item count
+
 		echo '</div>';
 
 		return ob_get_clean();
 	}
 
-	add_filter( 'ucf_news_display_card', 'ucf_news_display_card', 10, 4 );
+	add_filter( 'ucf_news_display_card', 'ucf_news_display_card', 10, 5 );
 }
 
 if ( ! function_exists( 'ucf_news_display_card_after' ) ) {

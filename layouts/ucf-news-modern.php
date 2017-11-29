@@ -36,9 +36,11 @@ if ( ! function_exists( 'ucf_news_display_modern_title' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_modern' ) ) {
-	function ucf_news_display_modern( $content, $items, $args, $display_type ) {
+	function ucf_news_display_modern( $content, $items, $args, $display_type, $fallback_message ) {
 		if ( ! is_array( $items ) ) { $items = array( $items ); }
 		ob_start();
+
+	if ( count( $items ) === 0 ) : echo $fallback_message; else :
 
 		foreach( $items as $item ) :
 			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
@@ -65,6 +67,8 @@ if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 		</div>
 	<?php
 		endforeach;
+
+	endif; // End if item count
 
 		return ob_get_clean();
 	}
