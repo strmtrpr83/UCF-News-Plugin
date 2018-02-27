@@ -14,7 +14,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'per_row'   => 3
 			),
 			$default_plugin_options = array(
-				'ucf_news_feed_url'       => 'http://today.ucf.edu/wp-json/wp/v2/posts/',
+				'ucf_news_feed_url'       => 'https://today.ucf.edu/wp-json/wp/v2/posts/',
 				'ucf_news_include_css'    => 'on',
 				'ucf_news_fallback_image' => ''
 			);
@@ -24,7 +24,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 
 			add_option( 'ucf_news_feed_url', $defaults['ucf_news_feed_url'] );
 			add_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
-			add_option( 'ucf_news_fallback_image', $defaults['ucf_news_include_css'] );
+			add_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
 		}
 
 		public static function delete_options() {
