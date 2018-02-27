@@ -94,8 +94,8 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 
 			ob_start();
 
-			if ( $items ) {
-				echo UCF_News_Common::display_news_items( $items, $layout, array_merge( $attr, $args ), 'default' );
+			if ( $items !== null ) {
+				echo UCF_News_Common::display_news_items( $items, $layout, array_merge( $attr, $args ), 'default', $content );
 			}
 
 			return ob_get_clean();
