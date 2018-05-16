@@ -9,62 +9,65 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 			add_shortcode( 'ucf-news-feed', array( 'UCF_News_Shortcode', 'sc_ucf_news_feed' ) );
 		}
 
-		public static function register_shortcode_interface() {
-			if ( class_exists( 'UCF_Shortcode_Interface' ) ) {
-				$params = array(
+		public static function register_shortcode_interface( $registered_shortcodes ) {
+			if ( class_exists( 'WP_SCIF_Config' ) ) {
+				$fields = array(
 					array(
 						'name'      => 'Title',
-						'id'        => 'title',
-						'help_text' => 'The title to display before the news feed',
+						'param'     => 'title',
+						'desc'      => 'The title to display before the news feed',
 						'type'      => 'text',
 						'default'   => 'News'
 					),
 					array(
 						'name'      => 'Layout',
-						'id'        => 'layout',
-						'help_text' => 'The layout to use to display the news items',
-						'type'      => 'dropdown',
-						'choices'   => $layouts,
+						'param'     => 'layout',
+						'desc'      => 'The layout to display the news items',
+						'type'      => 'select',
+						'options'   => UCF_News_Config::get_layouts(),
 						'default'   => 'classic'
 					),
 					array(
 						'name'      => 'Filter by Section ID',
-						'id'        => 'sections',
-						'help_text' => 'The section id of each section to filter by',
+						'param'     => 'sections',
+						'desc'      => 'The section id of each section to filter by',
 						'type'      => 'text',
 						'default'   => ''
 					),
 					array(
 						'name'      => 'Filter by Topic ID',
-						'id'        => 'topics',
-						'help_text' => 'The topic id of each topic to filter by',
+						'param'     => 'topics',
+						'desc'      => 'The topic id of each topic to filter by',
 						'type'      => 'text',
 						'default'   => ''
 					),
 					array(
 						'name'      => 'Number of News Items',
-						'id'        => 'limit',
-						'help_text' => 'The number of news items to show',
+						'param'     => 'limit',
+						'desc'      => 'The number of news items to show',
 						'type'      => 'number',
-						'default'   => '3'
+						'default'   => 3
 					),
 					array(
 						'name'      => 'Number of News Items Per Row',
-						'id'        => 'per_row',
-						'help_text' => 'The number of news items to show per row (for card layout only)',
+						'param'     => 'per_row',
+						'desc'      => 'The number of news items to show per row (for card layout only)',
 						'type'      => 'number',
-						'default'   => '3'
+						'default'   => 3
 					)
 				);
-
-				$args = array(
-					'name'        => 'UCF News Feed',
-					'command'     => 'ucf-news-feed',
-					'description' => 'Creates a feed of UCF News Items',
-					'params'      => $params
+				$shortcode = array(
+					'command' => 'ucf-news-feed',
+					'name'    => 'UCF News Feed',
+					'desc'    => 'Displays a feed of UCF News items.',
+					'content' => false,
+					'fields'  => $fields,
+					'preview' => true,
+					'group'   => 'UCF News'
 				);
 
-				UCF_Shrotcode_Interface::add_shortcode( $args );
+				$registered_shortcodes[] = $shortcode;
+				return $registered_shortcodes;
 			}
 		}
 
@@ -103,4 +106,12 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 	}
 }
 
-?>
+if ( ! function_exists( 'ucf_news_shortcode_interface_styles' ) ) {
+	function ucf_news_shortcode_interface_styles( $stylesheets ) {
+		$defaults = UCF_News_Config::get_default_plugin_options();
+		if ( get_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] ) === 'on' ) {
+			$stylesheets[] = plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE );
+		}
+		return $stylesheets;
+	}
+}
