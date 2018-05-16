@@ -33,7 +33,7 @@ if ( ! function_exists( 'ucf_news_activate' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_deactivate' ) ) {
-	function ucf_new_deactivate() {
+	function ucf_news_deactivate() {
 		UCF_News_Config::delete_options();
 	}
 
