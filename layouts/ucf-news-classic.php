@@ -36,11 +36,13 @@ if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
 }
 
 if ( ! function_exists( 'ucf_news_display_classic' ) ) {
-	function ucf_news_display_classic( $content, $items, $args, $display_type ) {
+	function ucf_news_display_classic( $content, $items, $args, $display_type, $fallback_message='' ) {
 		if ( ! is_array( $items ) ) { $items = array( $items ); }
 		ob_start();
 	?>
 		<div class="ucf-news-items">
+	<?php if ( count( $items ) === 0 ) : echo $fallback_message; ?>
+	<?php else : ?>
 	<?php
 		foreach( $items as $item ) :
 			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
@@ -59,13 +61,14 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 			</div>
 	<?php
 		endforeach;
+	endif; // End if item count
 	?>
 	</div>
 	<?php
 		return ob_get_clean();
 	}
 
-	add_filter( 'ucf_news_display_classic', 'ucf_news_display_classic', 10, 4 );
+	add_filter( 'ucf_news_display_classic', 'ucf_news_display_classic', 10, 5 );
 }
 
 if ( ! function_exists( 'ucf_news_display_classic_after' ) ) {

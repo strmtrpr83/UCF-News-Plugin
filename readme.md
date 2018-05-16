@@ -22,6 +22,14 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ## Changelog ##
 
+### 2.1.1 ###
+* Big Fixes:
+    * Added activation and deactivation hooks to handle default options.
+
+### 2.1.0 ###
+* Enhancements:
+    * Added `$fallback_message` parameter to allow a no results message to be customized. Add the message by inserting it in between the opening and closing shortcodes (the content area), i.e. `[ucf-news-feed]<insert message here>[/ucf-news-feed]`.
+
 ### 2.0.0 ###
 * Enhancements:
     * Updated `UCF_News_Common::display_news_items()` to render layout parts using filters instead of actions.  Please note this change is not backward-compatible with layouts registered using hooks provided by older versions of the plugin.

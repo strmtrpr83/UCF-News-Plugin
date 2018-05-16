@@ -6,7 +6,7 @@
 if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 	class UCF_News_Common {
-		public static function display_news_items( $items, $layout, $args, $display_type='default' ) {
+		public static function display_news_items( $items, $layout, $args, $display_type='default', $content='' ) {
 			ob_start();
 
 			// Before
@@ -24,9 +24,9 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			echo $layout_title;
 
 			// Main content/loop
-			$layout_content = ucf_news_display_classic( '', $items, $args, $display_type );
+			$layout_content = ucf_news_display_classic( '', $items, $args, $display_type, $content );
 			if ( has_filter( 'ucf_news_display_' . $layout ) ) {
-				$layout_content = apply_filters( 'ucf_news_display_' . $layout, $layout_content, $items, $args, $display_type );
+				$layout_content = apply_filters( 'ucf_news_display_' . $layout, $layout_content, $items, $args, $display_type, $content );
 			}
 			echo $layout_content;
 
@@ -57,7 +57,10 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 			if ( is_array( $featured_media ) ) {
 				$img_obj = $featured_media[0];
-				$img_url = $img_obj->media_details->sizes->feature->source_url;
+
+				if ( isset( $img_obj->media_details->sizes->feature->source_url ) ) {
+					$img_url = $img_obj->media_details->sizes->feature->source_url;
+				}
 
 				// If the feature image isn't defined, use the fallback image
 				if ( !$img_url ) {

@@ -12,7 +12,26 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'topics'    => '',
 				'limit'     => 3,
 				'per_row'   => 3
+			),
+			$default_plugin_options = array(
+				'ucf_news_feed_url'       => 'https://today.ucf.edu/wp-json/wp/v2/posts/',
+				'ucf_news_include_css'    => 'on',
+				'ucf_news_fallback_image' => ''
 			);
+
+		public static function add_options() {
+			$defaults = self::$default_plugin_options;
+
+			add_option( 'ucf_news_feed_url', $defaults['ucf_news_feed_url'] );
+			add_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
+			add_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
+		}
+
+		public static function delete_options() {
+			delete_option( 'ucf_news_feed_url' );
+			delete_option( 'ucf_news_include_css' );
+			delete_option( 'ucf_news_fallback_image' );
+		}
 
 		public static function get_layouts() {
 			$layouts = array(
@@ -28,6 +47,12 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 
 		public static function get_default_options() {
 			$defaults = self::$default_options;
+
+			return self::format_options( $defaults );
+		}
+
+		public static function get_default_plugin_options() {
+			$defaults = self::$default_plugin_options;
 
 			return self::format_options( $defaults );
 		}
@@ -55,6 +80,9 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 					case 'limit':
 					case 'per_row':
 						$list[$key] = intval( $val );
+						break;
+					case 'ucf_news_include_css':
+						$list[$key] = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
 						break;
 					default:
 						break;
@@ -95,7 +123,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				wp_enqueue_media();
 			}
 
-			$defaults = self::get_default_options();
+			$defaults = self::get_default_plugin_options();
 			$ucf_news_feed_url = get_option( 'ucf_news_feed_url', $defaults['ucf_news_feed_url'] );
 			$ucf_news_include_css = get_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
 			$ucf_news_fallback_image = get_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
