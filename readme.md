@@ -22,8 +22,16 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ## Changelog ##
 
+### 2.1.2 ###
+* Bug Fixes:
+    * Added some hardening to `UCF_News_Common::get_story_image_or_fallback()` to account for stories that may have an invalid `$featured_media` object/broken thumbnails
+    * Fixed typo in plugin deactivation function name
+    * Fixed WP Shortcode Interface registration
+* Enhancements:
+    * Added conditional WP Shortcode Interface preview styles
+
 ### 2.1.1 ###
-* Big Fixes:
+* Bug Fixes:
     * Added activation and deactivation hooks to handle default options.
 
 ### 2.1.0 ###
