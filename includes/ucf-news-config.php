@@ -83,11 +83,8 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				switch( $key ) {
 					case 'limit':
 					case 'per_row':
-<<<<<<< Updated upstream
 					case 'offset':
-=======
 					case 'ucf_news_http_timeout':
->>>>>>> Stashed changes
 						$list[$key] = intval( $val );
 						break;
 					case 'ucf_news_include_css':
