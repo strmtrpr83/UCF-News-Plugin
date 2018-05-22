@@ -10,7 +10,7 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		**/
 		public function __construct() {
 			$widget_opts = array(
-				'classname'   => 'ucf_news',
+				'classname'   => 'ucf-news-widget',
 				'description' => 'UCF News Widget'
 			);
 			parent::__construct( 'ucf_news_widget', 'UCF News Widget', $widget_opts );
@@ -45,15 +45,11 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 
 			ob_start();
 
-			if ( $items ):
-		?>
-			<aside class="widget ucf-news-widget">
-		<?php
-			echo UCF_News_Common::display_news_items( $items, $layout, $items_args, 'widget' );
-		?>
-			</aside>
-		<?php
-			endif;
+			if ( $items ) {
+				echo $args['before_widget'];
+				echo UCF_News_Common::display_news_items( $items, $layout, $items_args, 'widget' );
+				echo $args['after_widget'];
+			}
 
 			echo ob_get_clean();
 		}
