@@ -11,7 +11,8 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'sections'  => '',
 				'topics'    => '',
 				'limit'     => 3,
-				'per_row'   => 3
+				'per_row'   => 3,
+				'offset'    => 0
 			),
 			$default_plugin_options = array(
 				'ucf_news_feed_url'       => 'https://today.ucf.edu/wp-json/wp/v2/posts/',
@@ -79,6 +80,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				switch( $key ) {
 					case 'limit':
 					case 'per_row':
+					case 'offset':
 						$list[$key] = intval( $val );
 						break;
 					case 'ucf_news_include_css':
