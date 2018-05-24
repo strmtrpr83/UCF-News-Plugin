@@ -28,9 +28,6 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ### 2.1.3 ###
 * Bug Fixes:
-    * Added some hardening to UCF_News_Common::get_story_image_or_fallback() to account for stories that may have an invalid $featured_media object
-    * Fixed typo in ucf_news_deactivate(). Resolves #22
-    * Fixed WP SCIF registration and added shortcode preview css registration. Resolves #21
     * Added missing default `offset` value in `UCF_News_Config::$default_options`
     * Updated widget markup to respect `before_widget` and `after_widget` markup defined in themes
 * Enhancements:
