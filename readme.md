@@ -1,4 +1,4 @@
-# UCF News Plugin #
+ # UCF News Plugin #
 
 Provides a shortcode, widget, functions, and default styles for displaying UCF news.
 
@@ -21,6 +21,18 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 
 ## Changelog ##
+
+### 2.1.4 ###
+* Enhancements:
+    * Added Github Plugin URI to allow for installation from Github plugin.
+
+### 2.1.3 ###
+* Bug Fixes:
+    * Added missing default `offset` value in `UCF_News_Config::$default_options`
+    * Updated widget markup to respect `before_widget` and `after_widget` markup defined in themes
+* Enhancements:
+    * Added http_timeout setting to allow for adjustment.
+
 
 ### 2.1.2 ###
 * Bug Fixes:
