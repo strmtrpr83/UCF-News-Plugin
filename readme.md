@@ -22,6 +22,10 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ## Changelog ##
 
+### 2.1.4 ###
+* Enhancements:
+    * Added Github Plugin URI to allow for installation from Github plugin.
+
 ### 2.1.3 ###
 * Bug Fixes:
     * Added some hardening to UCF_News_Common::get_story_image_or_fallback() to account for stories that may have an invalid $featured_media object
