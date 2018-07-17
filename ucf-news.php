@@ -11,7 +11,11 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+// Puts the info in the header above into an array.
+$data = get_plugin_data( UCF_NEWS__PLUGIN_FILE, false, false );
+
 define( 'UCF_NEWS__PLUGIN_FILE', __FILE__ );
+define( 'UCF_NEWS__PLUGIN_VERSION', $data['Version'] );
 
 require_once 'includes/ucf-news-config.php';
 require_once 'includes/ucf-news-feed.php';

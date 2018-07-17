@@ -29,17 +29,15 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			// Get current version in options
 			$current_version = get_option( 'ucf_news_version' );
 
-			$data = get_plugin_data( UCF_NEWS__PLUGIN_FILE, false, false );
-			$installed_version = $data['Version'];
-
 			if ( $current_version === false ) {
-				add_option( 'ucf_news_version', $installed_version );
+				add_option( 'ucf_news_version', UCF_NEWS__PLUGIN_VERSION );
 				self::ensure_option_defaults();
 				return;
 			}
 
-			if ( version_compare( $current_version, $installed_version, '<' ) ) {
+			if ( version_compare( $current_version, UCF_NEWS__PLUGIN_VERSION, '<' ) ) {
 				self::ensure_option_defaults();
+				update_option( 'ucf_news_version', UCF_NEWS__PLUGIN_VERSION );
 			}
 		}
 
