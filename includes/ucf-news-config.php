@@ -18,7 +18,8 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'ucf_news_feed_url'       => 'https://today.ucf.edu/wp-json/wp/v2/posts/',
 				'ucf_news_include_css'    => 'on',
 				'ucf_news_fallback_image' => '',
-				'ucf_news_http_timeout'   => 5
+				'ucf_news_http_timeout'   => 5,
+				'ucf_news_thumbnail_size' => 'feature'
 			);
 
 		public static function add_options() {
@@ -28,6 +29,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			add_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
 			add_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
 			add_option( 'ucf_news_http_timeout', $defaults['ucf_news_http_timeout'] );
+			add_option( 'ucf_news_thumbnail_size', $default['ucf_news_thumbnail_size'] );
 		}
 
 		public static function delete_options() {
@@ -35,6 +37,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			delete_option( 'ucf_news_include_css' );
 			delete_option( 'ucf_news_fallback_image' );
 			delete_option( 'ucf_news_http_timeout' );
+			delete_option( 'ucf_news_thumbnail_size' );
 		}
 
 		public static function get_layouts() {
@@ -47,6 +50,20 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			$layouts = apply_filters( 'ucf_news_get_layouts', $layouts );
 
 			return $layouts;
+		}
+
+		public static function get_thumbnail_sizes() {
+			$sizes = array(
+				'feature'   => 'Feature (UCF Today Custom)',
+				'thumbnail' => 'Thumbnail',
+				'medium'    => 'Medium',
+				'large'     => 'Large',
+				'full'      => 'Full Size'
+			);
+
+			$sizes = apply_filters( 'ucf_news_get_thumbnail_sizes', $sizes );
+
+			return $sizes;
 		}
 
 		public static function get_default_options() {
@@ -118,6 +135,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			register_setting( 'ucf-news-group', 'ucf_news_include_css' );
 			register_setting( 'ucf-news-group', 'ucf_news_fallback_image' );
 			register_setting( 'ucf-news-group', 'ucf_news_http_timeout' );
+			register_setting( 'ucf-news-group', 'ucf_news_thumbnail_size' );
 		}
 
 		public static function add_settings_page() {
@@ -134,6 +152,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			$ucf_news_feed_url = get_option( 'ucf_news_feed_url', $defaults['ucf_news_feed_url'] );
 			$ucf_news_include_css = get_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
 			$ucf_news_http_timeout = get_option( 'ucf_news_http_timeout', $defaults['ucf_news_http_timeout'] );
+			$ucf_news_thumbnail_size = get_option( 'ucf_news_thumbnail_size', $defaults['ucf_news_thumbnail_size'] );
 			$ucf_news_fallback_image = get_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
 			$ucf_news_fallback_image_src = $ucf_news_fallback_image ? UCF_News_Common::get_fallback_image( $ucf_news_fallback_image ) : '';
 
@@ -157,6 +176,18 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				<tr valign="top">
 					<th scope="row">HTTP Timeout</th>
 					<td><input type="number" name="ucf_news_http_timeout" value="<?php echo esc_attr( $ucf_news_http_timeout ); ?>"></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Thumbnail Size</th>
+					<td>
+						<?php foreach( self::get_thumbnail_sizes() as $key => $val ) : ?>
+						<div>
+						<label for="ucf_news_thumbnail_size_<?php echo $key; ?>">
+						<input type="radio" name="ucf_news_thumbnail_size" id="ucf_news_thumbnail_size_<?php echo $key; ?>" value="<?php echo $key; ?>" <?php if ( $ucf_news_thumbnail_size === $key ) : ?> checked<?php endif; ?>>
+							<?php echo $val; ?>
+						</div>
+						<?php endforeach; ?>
+					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row">Fallback Image</th>

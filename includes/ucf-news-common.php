@@ -58,8 +58,42 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			if ( is_array( $featured_media ) ) {
 				$img_obj = $featured_media[0];
 
-				if ( isset( $img_obj->media_details->sizes->feature->source_url ) ) {
-					$img_url = $img_obj->media_details->sizes->feature->source_url;
+				$size = get_option(
+					'ucf_news_thumbnail_size',
+					UCF_News_Config::$default_plugin_options['ucf_news_thumbnail_size']
+				);
+
+				switch( $size ) {
+					case 'feature':
+						if ( isset( $img_obj->media_details->sizes->feature->source_url ) ) {
+							$img_url = $img_obj->media_details->sizes->feature->source_url;
+						}
+						break;
+					case 'thumbnail':
+						if ( isset( $img_obj->media_details->sizes->thumbnail->source_url ) ) {
+							$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+						}
+						break;
+					case 'medium':
+						if ( isset( $img_obj->media_details->sizes->medium->source_url ) ) {
+							$img_url = $img_obj->media_details->sizes->medium->source_url;
+						}
+						break;
+					case 'large':
+						if ( isset( $img_obj->media_details->sizes->large->source_url ) ) {
+							$img_url = $img_obj->media_details->sizes->large->source_url;
+						}
+						break;
+					case 'full':
+						if ( isset( $img_obj->media_details->sizes->fullsize->source_url ) ) {
+							$img_url = $img_obj->media_details->sizes->fullsize->source_url;
+						}
+						break;
+					default:
+						if ( isset( $img_obj->media_details->sizes->thumbnail->source_url ) ) {
+							$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+						}
+						break;
 				}
 
 				// If the feature image isn't defined, use the fallback image
