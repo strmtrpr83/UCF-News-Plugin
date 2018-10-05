@@ -61,7 +61,6 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 			<?php endif; ?>
 				<div class="ucf-news-item-title">
 					<a href="<?php echo $item->link; ?>">
-					<?php var_dump($item);?>
 						<?php echo $item->title->rendered; ?>
 					</a>
 				</div>
