@@ -39,7 +39,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			$url_option = get_option( 'ucf_news_feed_url' );
 
 			$args = array(
-				'url'        => $url_option ? $url_option : 'https://today.ucf.edu/wp-json/wp/v2/',
+				'url'        => $url_option ? $url_option : UCF_News_Config::$default_plugin_options['ucf_news_feed_url'],
 				'limit'      => isset( $args['limit'] ) ? (int) $args['limit'] : 3,
 				'offset'     => isset( $args['offset'] ) ? (int) $args['offset'] : 0,
 				'categories' => isset( $args['sections'] ) ? explode( ',', $args['sections'] ) : null,
@@ -76,14 +76,14 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 		}
 
 		public static function get_sections( $search ) {
-			$base_url = get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' );
+			$base_url = get_option( 'ucf_news_feed_url', UCF_News_Config::$default_plugin_options['ucf_news_feed_url'] );
 			$url      = $base_url . 'categories/?search=' . $search;
 
 			return self::get_json_feed( $url );
 		}
 
 		public static function get_topics( $search ) {
-			$base_url = get_option( 'ucf_news_feed_url', 'https://today.ucf.edu/wp-json/wp/v2/' );
+			$base_url = get_option( 'ucf_news_feed_url', UCF_News_Config::$default_plugin_options['ucf_news_feed_url'] );
 			$url      = $base_url . 'tags/?search=' . $search;
 
 			return self::get_json_feed( $url );
