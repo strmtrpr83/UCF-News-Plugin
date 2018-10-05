@@ -37,7 +37,13 @@ if ( ! function_exists( 'ucf_news_display_classic_title' ) ) {
 
 if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 	function ucf_news_display_classic( $content, $items, $args, $display_type, $fallback_message='' ) {
-		if ( ! is_array( $items ) ) { $items = array( $items ); }
+		if ( $items === false ) {
+			$items = array();
+		}
+		else if ( ! is_array( $items ) ) {
+			$items = array( $items );
+		}
+
 		ob_start();
 	?>
 		<div class="ucf-news-items">
@@ -55,6 +61,7 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 			<?php endif; ?>
 				<div class="ucf-news-item-title">
 					<a href="<?php echo $item->link; ?>">
+					<?php var_dump($item);?>
 						<?php echo $item->title->rendered; ?>
 					</a>
 				</div>
