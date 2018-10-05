@@ -37,7 +37,12 @@ if ( ! function_exists( 'ucf_news_display_modern_title' ) ) {
 
 if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 	function ucf_news_display_modern( $content, $items, $args, $display_type, $fallback_message ) {
-		if ( ! is_array( $items ) ) { $items = array( $items ); }
+		if ( $items === false ) {
+			$items = array();
+		}
+		else if ( ! is_array( $items ) ) {
+			$items = array( $items );
+		}
 
 		ob_start();
 
