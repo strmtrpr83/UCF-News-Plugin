@@ -37,7 +37,13 @@ if ( ! function_exists( 'ucf_news_display_card_title' ) ) {
 
 if ( ! function_exists( 'ucf_news_display_card' ) ) {
 	function ucf_news_display_card( $content, $items, $args, $display_type, $fallback_message='' ) {
-		if ( ! is_array( $items ) ) { $items = array( $items ); }
+		if ( $items === false ) {
+			$items = array();
+		}
+		else if ( ! is_array( $items ) ) {
+			$items = array( $items );
+		}
+
 		$per_row = $args['per_row'];
 
 		ob_start();
