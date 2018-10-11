@@ -22,6 +22,14 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ## Changelog ##
 
+### 2.1.5 ###
+* Enhancements:
+    * Removed duplicate hard-coded default feed url values throughout the plugin
+* Bug Fixes:
+    * Updated default `ucf_news_feed_url` option value to exclude "/posts/", so this url works out-of-the-box
+    * Fixed handling of invalid feed results in provided news layouts: layouts now avoid accessing non-existent object properties when feed results return `false`.
+
+
 ### 2.1.4 ###
 * Enhancements:
     * Added Github Plugin URI to allow for installation from Github plugin.
