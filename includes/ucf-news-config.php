@@ -15,7 +15,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'offset'    => 0
 			),
 			$default_plugin_options = array(
-				'ucf_news_feed_url'       => 'https://today.ucf.edu/wp-json/wp/v2/posts/',
+				'ucf_news_feed_url'       => 'https://today.ucf.edu/wp-json/wp/v2/',
 				'ucf_news_include_css'    => 'on',
 				'ucf_news_fallback_image' => '',
 				'ucf_news_http_timeout'   => 5
