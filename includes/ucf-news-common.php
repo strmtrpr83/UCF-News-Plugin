@@ -52,7 +52,30 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 		}
 
 		public static function get_story_image_or_fallback( $item ) {
-			return $item->thumbnail ?: self::get_fallback_image();
+			$img_url        = null;
+			$thumbnail      = property_exists( $item, 'thumbnail' ) ? $item->thumbnail : false;
+			$featured_media = isset( $item->_embedded->{'wp:featuredmedia'} ) ? $item->_embedded->{'wp:featuredmedia'} : false;
+
+			// Check for Today's custom 'thumbnail' field
+			if ( $thumbnail ) {
+				$img_url = $thumbnail;
+			}
+			// As a fallback for sites not pointing to Today,
+			// try to use featured image data instead
+			else if ( is_array( $featured_media ) ) {
+				$img_obj = $featured_media[0];
+
+				if ( isset( $img_obj->media_details->sizes->thumbnail->source_url ) ) {
+					$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+				}
+			}
+
+			// If the feature image isn't defined, use the fallback image
+			if ( ! $img_url ) {
+				$img_url = self::get_fallback_image();
+			}
+
+			return $img_url;
 		}
 
 		public static function get_story_terms( $item, $taxonomy ) {
