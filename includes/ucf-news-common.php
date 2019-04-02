@@ -65,8 +65,8 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			else if ( is_array( $featured_media ) ) {
 				$img_obj = $featured_media[0];
 
-				if ( isset( $img_obj->media_details->sizes->thumbnail->source_url ) ) {
-					$img_url = $img_obj->media_details->sizes->thumbnail->source_url;
+				if ( isset( $img_obj->media_details->sizes->medium->source_url ) ) {
+					$img_url = $img_obj->media_details->sizes->medium->source_url;
 				}
 			}
 
