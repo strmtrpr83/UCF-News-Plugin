@@ -64,7 +64,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 				'offset'         => $args['offset'],
 				'category_slugs' => $categories,
 				'tag_slugs'      => $tags,
-				'_embed'     => true
+				'_embed'         => true
 			) );
 			//$query = preg_replace( '/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query );
 			$query = preg_replace( '/%5B[0-9]+%5D/simU', '%5B%5D', $query );
