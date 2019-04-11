@@ -22,6 +22,11 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ## Changelog ##
 
+### 2.1.6 ###
+* Enhancements:
+    * In preparation for a rebuilt UCF Today site, `UCF_News_Common::get_story_image_or_fallback()` has been modified to prioritize the custom `thumbnail` feed value when retrieving a story's image.  If the `thumbnail` value isn't present in the feed, WordPress's standard media details will be referenced, like before, and the "medium" thumbnail size is returned instead.
+    * Updated `.ucf-news-thumbnail-image` class to force thumbnails to span the full width of their parent container (in case a very small thumbnail is returned for some reason).
+
 ### 2.1.5 ###
 * Enhancements:
     * Removed duplicate hard-coded default feed url values throughout the plugin
