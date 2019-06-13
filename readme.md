@@ -22,6 +22,10 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ## Changelog ##
 
+### 2.1.7 ###
+* Enhancements:
+    * Added ability to override the default URL per shortcode, specifically so the `main-site-stories` feed on /news/ can be used.
+
 ### 2.1.6 ###
 * Enhancements:
     * In preparation for a rebuilt UCF Today site, `UCF_News_Common::get_story_image_or_fallback()` has been modified to prioritize the custom `thumbnail` feed value when retrieving a story's image.  If the `thumbnail` value isn't present in the feed, WordPress's standard media details will be referenced, like before, and the "medium" thumbnail size is returned instead.
