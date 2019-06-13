@@ -54,6 +54,13 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 						'desc'      => 'The number of news items to show per row (for card layout only)',
 						'type'      => 'number',
 						'default'   => 3
+					),
+					array(
+						'name'      => 'Feed URL',
+						'param'     => 'feed_url',
+						'desc'      => 'Allows the base URL for the feed to be overidden.',
+						'type'      => 'text',
+						'default'   => ''
 					)
 				);
 				$shortcode = array(
@@ -79,14 +86,16 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 				'topics'    => '',
 				'offset'    => 0,
 				'limit'     => 3,
-				'per_row'    => 3
+				'per_row'   => 3,
+				'feed_url'  => ''
 			), $attr );
 
-			$title = $attr['title'];
-			$layout = $attr['layout'];
-			$per_row = $attr['per_row'];
+			$title    = $attr['title'];
+			$layout   = $attr['layout'];
+			$per_row  = $attr['per_row'];
 
 			$args = array(
+				'feed_url' => $attr['feed_url'],
 				'sections' => $attr['sections'] ?: null,
 				'topics'   => $attr['topics'] ?: null,
 				'offset'   => $attr['offset'] ? (int) $attr['offset'] : 0,
