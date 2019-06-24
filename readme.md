@@ -5,7 +5,7 @@ Provides a shortcode, widget, functions, and default styles for displaying UCF n
 
 ## Description ##
 
-This plugin provides a shortcode, widget, helper functions, and default styles for displaying news stories from [today.ucf.edu](https://today.ucf.edu).  It is written to work out-of-the-box for non-programmers, but is also extensible and customizable for developers.
+This plugin provides a shortcode, widget, helper functions, and default styles for displaying news stories from [UCF Today](https://www.ucf.edu/news/).  It is written to work out-of-the-box for non-programmers, but is also extensible and customizable for developers.
 
 
 ## Installation ##
