@@ -107,9 +107,9 @@ if ( ! class_exists( 'UCF_News_Widget' ) ) {
 		}
 	}
 
-	add_action( 'widgets_init',
-		create_function( '', 'return register_widget( "UCF_News_Widget" );' )
-	);
+	add_action( 'widgets_init', function() {
+		return register_widget( 'UCF_News_Widget' );
+	} );
 
 }
 
