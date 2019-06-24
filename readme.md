@@ -22,6 +22,11 @@ This plugin provides a shortcode, widget, helper functions, and default styles f
 
 ## Changelog ##
 
+### 2.1.8 ###
+* Enhancements:
+    * Removed usage of `create_function()` throughout the plugin for improved compatibility with newer versions of PHP.
+    * Updated today.ucf.edu references in the plugin to ucf.edu/news/
+
 ### 2.1.7 ###
 * Enhancements:
     * Added ability to override the default URL per shortcode, specifically so the `main-site-stories` feed on /news/ can be used.
