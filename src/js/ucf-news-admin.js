@@ -1,4 +1,6 @@
-jQuery(function($) {
-  $('.section-input').suggest(ajaxurl + "?action=ucf-news-sections", {delay: 500, minchars: 2, multiple: true});
-  $('.topic-input').suggest(ajaxurl + "?action=ucf-news-topics", {delay: 500, minchars: 2, multiple: true});
-}); 
+//
+// Project-specific scripts
+//
+
+// =require ucf-news-admin-widget.js
+// =require ucf-news-upload.js
