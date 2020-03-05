@@ -50,8 +50,7 @@ if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 
 		foreach( $items as $item ) :
 			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
-			$sections = UCF_News_Common::get_story_sections( $item );
-			$section = $sections[0];
+			$section = UCF_News_Common::get_story_primary_section( $item );
 	?>
 		<div class="ucf-news-item">
 			<a href="<?php echo $item->link; ?>">
@@ -61,9 +60,11 @@ if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 				</div>
 			<?php endif; ?>
 				<div class="ucf-news-item-content">
+					<?php if ( $section ): ?>
 					<div class="ucf-news-section">
 						<span class="ucf-news-section-title"><?php echo $section->name; ?></span>
 					</div>
+					<?php endif; ?>
 					<div class="ucf-news-item-details">
 						<p class="ucf-news-item-title"><?php echo $item->title->rendered; ?></p>
 						<p class="ucf-news-item-excerpt"><?php echo wp_trim_words( $item->excerpt->rendered, 25 ); ?></p>
