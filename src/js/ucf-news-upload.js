@@ -1,8 +1,11 @@
-const ucf_news_upload = function ($) {
+/* global wp */
+
+(function ($) {
+
   $('.ucf_news_fallback_image_upload').click((e) => {
     e.preventDefault();
 
-    var uploader = wp.media({
+    const uploader = wp.media({
       title: 'News Fallback Image',
       button: {
         text: 'Upload Image'
@@ -16,8 +19,5 @@ const ucf_news_upload = function ($) {
       })
       .open();
   });
-};
 
-jQuery(document).ready(($) => {
-  ucf_news_upload($);
-});
+}(jQuery));
