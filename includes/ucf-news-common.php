@@ -118,6 +118,14 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			return self::get_story_terms( $item, 'post_tag' );
 		}
 
+		/**
+		 * Returns the primary section (category) for a given story.
+		 *
+		 * @since 2.1.9
+		 * @author Jo Dickson
+		 * @param object REST API result for a post
+		 * @return mixed Term object, or null
+		 */
 		public static function get_story_primary_section( $item ) {
 			$primary  = null;
 			$sections = self::get_story_sections( $item );
@@ -137,6 +145,14 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			return $primary;
 		}
 
+		/**
+		 * Returns the primary topic (tag) for a given story.
+		 *
+		 * @since 2.1.9
+		 * @author Jo Dickson
+		 * @param object REST API result for a post
+		 * @return mixed Term object, or null
+		 */
 		public static function get_story_primary_topic( $item ) {
 			$primary = null;
 			$topics  = self::get_story_topics( $item );
