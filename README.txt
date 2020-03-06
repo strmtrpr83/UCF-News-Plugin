@@ -1,35 +1,42 @@
-# UCF News Plugin #
+=== UCF News Plugin ===
+Contributors: ucfwebcom
+Requires at least: 5.3
+Tested up to: 5.3
+Stable tag: 2.1.8
+Requires PHP: 5.4
+License: GPLv3 or later
+License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
 Provides a shortcode, widget, functions, and default styles for displaying UCF news.
 
 
-## Description ##
+== Description ==
 
 This plugin provides a shortcode, widget, helper functions, and default styles for displaying news stories from [UCF Today](https://www.ucf.edu/news/).  It is written to work out-of-the-box for non-programmers, but is also extensible and customizable for developers.
 
 
-## Documentation ##
+== Documentation ==
 
 Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/wiki) for detailed information about this plugin, installation instructions, and more.
 
 
-## Changelog ##
+== Changelog ==
 
-### 2.1.8 ###
+= 2.1.8 =
 Enhancements:
 * Removed usage of `create_function()` throughout the plugin for improved compatibility with newer versions of PHP.
 * Updated today.ucf.edu references in the plugin to ucf.edu/news/
 
-### 2.1.7 ###
+= 2.1.7 =
 Enhancements:
 * Added ability to override the default URL per shortcode, specifically so the `main-site-stories` feed on /news/ can be used.
 
-### 2.1.6 ###
+= 2.1.6 =
 Enhancements:
 * In preparation for a rebuilt UCF Today site, `UCF_News_Common::get_story_image_or_fallback()` has been modified to prioritize the custom `thumbnail` feed value when retrieving a story's image.  If the `thumbnail` value isn't present in the feed, WordPress's standard media details will be referenced, like before, and the "medium" thumbnail size is returned instead.
 * Updated `.ucf-news-thumbnail-image` class to force thumbnails to span the full width of their parent container (in case a very small thumbnail is returned for some reason).
 
-### 2.1.5 ###
+= 2.1.5 =
 Enhancements:
 * Removed duplicate hard-coded default feed url values throughout the plugin
 
@@ -37,11 +44,11 @@ Bug Fixes:
 * Updated default `ucf_news_feed_url` option value to exclude "/posts/", so this url works out-of-the-box
 * Fixed handling of invalid feed results in provided news layouts: layouts now avoid accessing non-existent object properties when feed results return `false`.
 
-### 2.1.4 ###
+= 2.1.4 =
 Enhancements:
 * Added Github Plugin URI to allow for installation from Github plugin.
 
-### 2.1.3 ###
+= 2.1.3 =
 Bug Fixes:
 * Added missing default `offset` value in `UCF_News_Config::$default_options`
 * Updated widget markup to respect `before_widget` and `after_widget` markup defined in themes
@@ -49,7 +56,7 @@ Bug Fixes:
 Enhancements:
 * Added http_timeout setting to allow for adjustment.
 
-### 2.1.2 ###
+= 2.1.2 =
 Bug Fixes:
 * Added some hardening to `UCF_News_Common::get_story_image_or_fallback()` to account for stories that may have an invalid `$featured_media` object/broken thumbnails
 * Fixed typo in plugin deactivation function name
@@ -58,75 +65,75 @@ Bug Fixes:
 Enhancements:
 * Added conditional WP Shortcode Interface preview styles
 
-### 2.1.1 ###
+= 2.1.1 =
 Bug Fixes:
 * Added activation and deactivation hooks to handle default options.
 
-### 2.1.0 ###
+= 2.1.0 =
 Enhancements:
 * Added `$fallback_message` parameter to allow a no results message to be customized. Add the message by inserting it in between the opening and closing shortcodes (the content area), i.e. `[ucf-news-feed]<insert message here>[/ucf-news-feed]`.
 
-### 2.0.0 ###
+= 2.0.0 =
 Enhancements:
 * Updated `UCF_News_Common::display_news_items()` to render layout parts using filters instead of actions.  Please note this change is not backward-compatible with layouts registered using hooks provided by older versions of the plugin.
 
-### 1.1.4 ###
+= 1.1.4 =
 Bug Fixes:
 * Fixed `display_news_items()` in `UCF_News_Common` not being declared as a static method
 * Updated filtering of options in `UCF_News_Feed::get_news_items()` to allow 0 values, fixing undefined index notices in some cases.
 
-### 1.1.3 ###
+= 1.1.3 =
 Enhancements:
 * Updated mobile styles for card layouts.
 
-### 1.1.2 ###
+= 1.1.2 =
 Enhancements:
 * Added modern and card layouts.
 
-### 1.1.1 ###
+= 1.1.1 =
 Bug Fixes:
 * Make sure UCF_News_Feed::get_news_items() always has a feed_url set, even if the plugin option's value is empty (thanks @jorgedonoso!)
 
-### 1.1.0 ###
+= 1.1.0 =
 Bug Fixes:
 * Updated to match the new query params available on UCF Today.
 
-### 1.0.4 (Deprecated) ###
+= 1.0.4 (Deprecated) =
 Bug Fixes:
 * Updates the way the news feed is pulled to prevent error when accessing external host.
 
-### 1.0.3 ###
+= 1.0.3 =
 Enhancements:
 * Adds empty alt tag to classic layout images for accessibility.
 
-### 1.0.2 ###
+= 1.0.2 =
 Bug Fixes:
 * Corrects filter name from category to category_name.
 
-### 1.0.1 ###
+= 1.0.1 =
 Bug Fixes:
 * Corrects a bug with sections and topics filters.
 
-### 1.0.0 ###
+= 1.0.0 =
 * Initial release
 
 
-## Upgrade Notice ##
+== Upgrade Notice ==
 
 n/a
 
 
-## Development ##
+== Development ==
 
 Note that compiled, minified css and js files are included within the repo.  Changes to these files should be tracked via git (so that users installing the plugin using traditional installation methods will have a working plugin out-of-the-box.)
 
 [Enabling debug mode](https://codex.wordpress.org/Debugging_in_WordPress) in your `wp-config.php` file is recommended during development to help catch warnings and bugs.
 
-### Requirements ###
+= Requirements =
 * node
 * gulp-cli
 
-### Instructions ###
+= Instructions =
 1. Clone the UCF-News-Plugin repo into your local development environment, within your WordPress installation's `plugins/` directory: `git clone https://github.com/UCF/UCF-News-Plugin.git`
 2. `cd` into the new UCF-News-Plugin directory, and run `npm install` to install required packages for development into `node_modules/` within the repo
 3. Optional: If you'd like to enable [BrowserSync](https://browsersync.io) for local development, or make other changes to this project's default gulp configuration, copy `gulp-config.template.json`, make any desired changes, and save as `gulp-config.json`.
@@ -140,10 +147,10 @@ Note that compiled, minified css and js files are included within the repo.  Cha
 6. Configure plugin settings from the WordPress admin under "UCF News".
 7. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when plugin files change.
 
-### Other Notes ###
+= Other Notes =
 * This plugin's README.md file is automatically generated. Please only make modifications to the README.txt file, and make sure the `gulp readme` command has been run before committing README changes.  See the [contributing guidelines](https://github.com/UCF/UCF-News-Plugin/blob/master/CONTRIBUTING.md) for more information.
 
 
-## Contributing ##
+== Contributing ==
 
 Want to submit a bug report or feature request?  Check out our [contributing guidelines](https://github.com/UCF/UCF-News-Plugin/blob/master/CONTRIBUTING.md) for more information.  We'd love to hear from you!
