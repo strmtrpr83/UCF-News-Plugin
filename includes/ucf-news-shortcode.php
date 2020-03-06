@@ -49,6 +49,13 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 						'default'   => 3
 					),
 					array(
+						'name'      => 'News Item Offset',
+						'param'     => 'offset',
+						'desc'      => 'The number of news items to skip in the feed. For example, set to 1 to skip the first article.',
+						'type'      => 'number',
+						'default'   => 0
+					),
+					array(
 						'name'      => 'Number of News Items Per Row',
 						'param'     => 'per_row',
 						'desc'      => 'The number of news items to show per row (for card layout only)',
