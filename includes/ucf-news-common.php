@@ -106,7 +106,9 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 		public static function add_css() {
 			if ( get_option( 'ucf_news_include_css' ) ) {
-				wp_enqueue_style( 'ucf_news_css', plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE ), false, false, 'all' );
+				$plugin_data   = get_plugin_data( UCF_NEWS__PLUGIN_FILE, false, false );
+				$version       = $plugin_data['Version'];
+				wp_enqueue_style( 'ucf_news_css', plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE ), false, $version, 'all' );
 			}
 		}
 
