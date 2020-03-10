@@ -28,16 +28,16 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 						'default'   => 'classic'
 					),
 					array(
-						'name'      => 'Filter by Section ID',
+						'name'      => 'Filter by Section',
 						'param'     => 'sections',
-						'desc'      => 'The section id of each section to filter by',
+						'desc'      => 'Allows you to filter the results by section (category). Enter one ore more comma-separated section slugs.',
 						'type'      => 'text',
 						'default'   => ''
 					),
 					array(
-						'name'      => 'Filter by Topic ID',
+						'name'      => 'Filter by Topic',
 						'param'     => 'topics',
-						'desc'      => 'The topic id of each topic to filter by',
+						'desc'      => 'Allows you to filter the results by topic (tag). Enter one or more comma-separated topic slugs.',
 						'type'      => 'text',
 						'default'   => ''
 					),
@@ -47,6 +47,13 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 						'desc'      => 'The number of news items to show',
 						'type'      => 'number',
 						'default'   => 3
+					),
+					array(
+						'name'      => 'News Item Offset',
+						'param'     => 'offset',
+						'desc'      => 'The number of news items to skip in the feed. For example, set to 1 to skip the first article.',
+						'type'      => 'number',
+						'default'   => 0
 					),
 					array(
 						'name'      => 'Number of News Items Per Row',
