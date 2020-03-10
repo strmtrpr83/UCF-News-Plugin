@@ -106,7 +106,9 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 		public static function add_css() {
 			if ( get_option( 'ucf_news_include_css' ) ) {
-				wp_enqueue_style( 'ucf_news_css', plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE ), false, false, 'all' );
+				$plugin_data   = get_plugin_data( UCF_NEWS__PLUGIN_FILE, false, false );
+				$version       = $plugin_data['Version'];
+				wp_enqueue_style( 'ucf_news_css', plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE ), false, $version, 'all' );
 			}
 		}
 
@@ -116,6 +118,60 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 		public static function get_story_topics( $item ) {
 			return self::get_story_terms( $item, 'post_tag' );
+		}
+
+		/**
+		 * Returns the primary section (category) for a given story.
+		 *
+		 * @since 2.1.9
+		 * @author Jo Dickson
+		 * @param object REST API result for a post
+		 * @return mixed Term object, or null
+		 */
+		public static function get_story_primary_section( $item ) {
+			$primary  = null;
+			$sections = self::get_story_sections( $item );
+
+			if ( property_exists( $item, 'primary_category' ) ) {
+				foreach ( $sections as $section ) {
+					if ( $section->id === $item->primary_category ) {
+						$primary = $section;
+						break;
+					}
+				}
+			}
+			else {
+				$primary = $sections[0];
+			}
+
+			return $primary;
+		}
+
+		/**
+		 * Returns the primary topic (tag) for a given story.
+		 *
+		 * @since 2.1.9
+		 * @author Jo Dickson
+		 * @param object REST API result for a post
+		 * @return mixed Term object, or null
+		 */
+		public static function get_story_primary_topic( $item ) {
+			$primary = null;
+			$topics  = self::get_story_topics( $item );
+
+			if ( property_exists( $item, 'primary_tag' ) ) {
+				foreach ( $topics as $topic ) {
+					if ( $topic->id === $item->primary_tag ) {
+						$primary = $topic;
+						break;
+					}
+				}
+			}
+			else {
+				$primary = $topics[0];
+			}
+
+			return $primary;
 		}
 	}
 
