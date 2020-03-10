@@ -15,6 +15,16 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 ## Changelog ##
 
+### 2.1.9 ###
+Enhancements:
+* Added functions for retrieving a news story's primary category (section) and tag (topic)
+* Updated the "modern" news list layout to display the story's primary category (section), if available
+* Added plugin version number to enqueued plugin assets for cache-busting purposes
+* WordPress Shortcode Interface integration improvements:
+  * Added missing `offset` param to WP SCIF shortcode registration
+  * Fixed descriptions for `sections` and `topics` params to note that term slugs are expected (not IDs)
+* Updated repo packages; added linter configs; added Github issue templates and CONTRIBUTING doc
+
 ### 2.1.8 ###
 Enhancements:
 * Removed usage of `create_function()` throughout the plugin for improved compatibility with newer versions of PHP.
