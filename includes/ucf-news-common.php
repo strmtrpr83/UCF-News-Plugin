@@ -40,6 +40,34 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			return ob_get_clean();
 		}
 
+		public static function display_external_stories( $items, $layout, $args ) {
+			if ( has_filter( "ucf_external_stories_{$layout}_before" ) ) {
+				$before = apply_filters( "ucf_external_stories_{$layout}_before", null, $items, $args );
+			} else {
+				$before = ucf_external_stories_classic_before( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_external_stories_{$layout}_title" ) ) {
+				$title = apply_filters( "ucf_external_stories_{$layout}_title", null, $items, $args );
+			} else {
+				$title = ucf_external_stories_classic_title( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_external_stories_{$layout}_content" ) ) {
+				$content = apply_filters( "ucf_external_stories_{$layout}_content", null, $items, $args );
+			} else {
+				$content = ucf_external_stories_classic_content( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_external_stories_{$layout}_after" ) ) {
+				$after = apply_filters( "ucf_external_stories_{$layout}_after", null, $items, $args );
+			} else {
+				$after = ucf_external_stories_classic_after( null, $items, $args );
+			}
+
+			return $before . $title . $content . $after;
+		}
+
 		public static function get_fallback_image( $size='thumbnail' ) {
 			$image_id = get_option( 'ucf_news_fallback_image', null );
 			$retval = null;
