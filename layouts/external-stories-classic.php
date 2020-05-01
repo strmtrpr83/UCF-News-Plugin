@@ -21,7 +21,7 @@ if ( ! function_exists( 'ucf_external_stories_classic_title' ) ) {
 
 		if ( isset( $args['title'] ) && ! empty( $args['title'] ) ) :
 	?>
-		<h2 class="h6 text-uppercase text-default-aw mb-4"><?php echo $args['title']; ?></h2>
+		<h2 class="h5 text-uppercase text-default-aw mb-4"><?php echo $args['title']; ?></h2>
 	<?php
 		endif;
 
@@ -39,7 +39,7 @@ if ( ! function_exists( 'ucf_external_stories_classic_content' ) ) {
 	?>
 		<article class="mb-3">
 			<a href="<?php echo $item->url; ?>" target="_blank" rel="nofollow">
-				<h3 class="h4 text-secondary external-story-title"><?php echo $item->title; ?></h3>
+				<h3 class="h6 text-secondary external-story-title"><?php echo $item->title; ?></h3>
 			</a>
 			<cite class="external-story-source text-muted text-small">
 				<?php echo $item->source; ?>
