@@ -40,6 +40,34 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			return ob_get_clean();
 		}
 
+		public static function display_external_stories( $items, $layout, $args ) {
+			if ( has_filter( "ucf_external_stories_{$layout}_before" ) ) {
+				$before = apply_filters( "ucf_external_stories_{$layout}_before", null, $items, $args );
+			} else {
+				$before = ucf_external_stories_classic_before( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_external_stories_{$layout}_title" ) ) {
+				$title = apply_filters( "ucf_external_stories_{$layout}_title", null, $items, $args );
+			} else {
+				$title = ucf_external_stories_classic_title( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_external_stories_{$layout}_content" ) ) {
+				$content = apply_filters( "ucf_external_stories_{$layout}_content", null, $items, $args );
+			} else {
+				$content = ucf_external_stories_classic_content( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_external_stories_{$layout}_after" ) ) {
+				$after = apply_filters( "ucf_external_stories_{$layout}_after", null, $items, $args );
+			} else {
+				$after = ucf_external_stories_classic_after( null, $items, $args );
+			}
+
+			return $before . $title . $content . $after;
+		}
+
 		public static function get_fallback_image( $size='thumbnail' ) {
 			$image_id = get_option( 'ucf_news_fallback_image', null );
 			$retval = null;
@@ -106,7 +134,9 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 		public static function add_css() {
 			if ( get_option( 'ucf_news_include_css' ) ) {
-				wp_enqueue_style( 'ucf_news_css', plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE ), false, false, 'all' );
+				$plugin_data   = get_plugin_data( UCF_NEWS__PLUGIN_FILE, false, false );
+				$version       = $plugin_data['Version'];
+				wp_enqueue_style( 'ucf_news_css', plugins_url( 'static/css/ucf-news.min.css', UCF_NEWS__PLUGIN_FILE ), false, $version, 'all' );
 			}
 		}
 
@@ -116,6 +146,60 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 
 		public static function get_story_topics( $item ) {
 			return self::get_story_terms( $item, 'post_tag' );
+		}
+
+		/**
+		 * Returns the primary section (category) for a given story.
+		 *
+		 * @since 2.1.9
+		 * @author Jo Dickson
+		 * @param object REST API result for a post
+		 * @return mixed Term object, or null
+		 */
+		public static function get_story_primary_section( $item ) {
+			$primary  = null;
+			$sections = self::get_story_sections( $item );
+
+			if ( property_exists( $item, 'primary_category' ) ) {
+				foreach ( $sections as $section ) {
+					if ( $section->id === $item->primary_category ) {
+						$primary = $section;
+						break;
+					}
+				}
+			}
+			else {
+				$primary = $sections[0];
+			}
+
+			return $primary;
+		}
+
+		/**
+		 * Returns the primary topic (tag) for a given story.
+		 *
+		 * @since 2.1.9
+		 * @author Jo Dickson
+		 * @param object REST API result for a post
+		 * @return mixed Term object, or null
+		 */
+		public static function get_story_primary_topic( $item ) {
+			$primary = null;
+			$topics  = self::get_story_topics( $item );
+
+			if ( property_exists( $item, 'primary_tag' ) ) {
+				foreach ( $topics as $topic ) {
+					if ( $topic->id === $item->primary_tag ) {
+						$primary = $topic;
+						break;
+					}
+				}
+			}
+			else {
+				$primary = $topics[0];
+			}
+
+			return $primary;
 		}
 	}
 
