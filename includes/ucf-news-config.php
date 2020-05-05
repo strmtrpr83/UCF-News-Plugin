@@ -52,6 +52,16 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			return $layouts;
 		}
 
+		public static function get_external_stories_layouts() {
+			$layouts = array(
+				'classic' => 'Classic Layout'
+			);
+
+			$layouts = apply_filters( 'ucf_external_stories_layouts', $layouts );
+
+			return $layouts;
+		}
+
 		public static function get_default_options() {
 			$defaults = self::$default_options;
 
@@ -155,7 +165,10 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				</tr>
 				<tr valign="top">
 					<th scope="row">UCF External Stories Feed URL</th>
-					<td><input type="text" name="ucf_external_stories_feed_url" value="<?php echo esc_attr( $ucf_news_external_stories_feed_url ); ?>"></td>
+					<td>
+						<input type="text" name="ucf_external_stories_feed_url" value="<?php echo esc_attr( $ucf_news_external_stories_feed_url ); ?>">
+						<p class="description">URL cannot include query parameters</p>
+					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row">Include CSS</th>

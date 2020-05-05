@@ -24,7 +24,7 @@ if ( ! class_exists( 'External_Stories_Shortcode' ) ) {
 						'param'     => 'layout',
 						'desc'      => 'The layout to display the news items',
 						'type'      => 'select',
-						'options'   => UCF_News_Config::get_layouts(),
+						'options'   => UCF_News_Config::get_external_stories_layouts(),
 						'default'   => 'classic'
 					),
 					array(
