@@ -15,16 +15,18 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'offset'    => 0
 			),
 			$default_plugin_options = array(
-				'ucf_news_feed_url'       => 'https://www.ucf.edu/news/wp-json/wp/v2/',
-				'ucf_news_include_css'    => 'on',
-				'ucf_news_fallback_image' => '',
-				'ucf_news_http_timeout'   => 5
+				'ucf_news_feed_url'             => 'https://www.ucf.edu/news/wp-json/wp/v2/',
+				'ucf_external_stories_feed_url' => 'https://www.ucf.edu/news/wp-json/ucf-news/v1/external-stories/',
+				'ucf_news_include_css'          => 'on',
+				'ucf_news_fallback_image'       => '',
+				'ucf_news_http_timeout'         => 5
 			);
 
 		public static function add_options() {
 			$defaults = self::$default_plugin_options;
 
 			add_option( 'ucf_news_feed_url', $defaults['ucf_news_feed_url'] );
+			add_option( 'ucf_external_stories_feed_url', $defaults['ucf_external_stories_feed_url'] );
 			add_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
 			add_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
 			add_option( 'ucf_news_http_timeout', $defaults['ucf_news_http_timeout'] );
@@ -32,6 +34,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 
 		public static function delete_options() {
 			delete_option( 'ucf_news_feed_url' );
+			delete_option( 'ucf_external_stories_feed_url' );
 			delete_option( 'ucf_news_include_css' );
 			delete_option( 'ucf_news_fallback_image' );
 			delete_option( 'ucf_news_http_timeout' );
@@ -45,6 +48,16 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 			);
 
 			$layouts = apply_filters( 'ucf_news_get_layouts', $layouts );
+
+			return $layouts;
+		}
+
+		public static function get_external_stories_layouts() {
+			$layouts = array(
+				'classic' => 'Classic Layout'
+			);
+
+			$layouts = apply_filters( 'ucf_external_stories_layouts', $layouts );
 
 			return $layouts;
 		}
@@ -115,6 +128,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 
 		public static function register_settings() {
 			register_setting( 'ucf-news-group', 'ucf_news_feed_url' );
+			register_setting( 'ucf-news-group', 'ucf_external_stories_feed_url' );
 			register_setting( 'ucf-news-group', 'ucf_news_include_css' );
 			register_setting( 'ucf-news-group', 'ucf_news_fallback_image' );
 			register_setting( 'ucf-news-group', 'ucf_news_http_timeout' );
@@ -132,6 +146,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 
 			$defaults = self::get_default_plugin_options();
 			$ucf_news_feed_url = get_option( 'ucf_news_feed_url', $defaults['ucf_news_feed_url'] );
+			$ucf_news_external_stories_feed_url = get_option( 'ucf_external_stories_feed_url', $defaults['ucf_external_stories_feed_url'] );
 			$ucf_news_include_css = get_option( 'ucf_news_include_css', $defaults['ucf_news_include_css'] );
 			$ucf_news_http_timeout = get_option( 'ucf_news_http_timeout', $defaults['ucf_news_http_timeout'] );
 			$ucf_news_fallback_image = get_option( 'ucf_news_fallback_image', $defaults['ucf_news_fallback_image'] );
@@ -147,6 +162,13 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				<tr valign="top">
 					<th scope="row">UCF News Feed URL</th>
 					<td><input type="text" name="ucf_news_feed_url" value="<?php echo esc_attr( $ucf_news_feed_url ); ?>"></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">UCF External Stories Feed URL</th>
+					<td>
+						<input type="text" name="ucf_external_stories_feed_url" value="<?php echo esc_attr( $ucf_news_external_stories_feed_url ); ?>">
+						<p class="description">URL cannot include query parameters</p>
+					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row">Include CSS</th>
