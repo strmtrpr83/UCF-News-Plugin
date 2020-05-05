@@ -15,6 +15,10 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 ## Changelog ##
 
+### 2.2.0 ###
+Enhancements:
+* Added ucf-external-stories shortcode.
+
 ### 2.1.9 ###
 Enhancements:
 * Added functions for retrieving a news story's primary category (section) and tag (topic)
