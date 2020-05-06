@@ -2,7 +2,7 @@
 /*
 Plugin Name: UCF News
 Description: Contains shortcode and widget for displaying UCF News Feeds
-Version: 2.1.9
+Version: 2.2.0
 Author: UCF Web Communications
 License: GPL3
 Github Plugin URI: UCF/UCF-News-Plugin
