@@ -15,6 +15,10 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 ## Changelog ##
 
+### 2.2.1 ###
+Bug Fixes:
+* Updated to ensure the `ucf_external_stories_feed_url` has a default value even if there isn't one in the options table.
+
 ### 2.2.0 ###
 Enhancements:
 * Added ucf-external-stories shortcode.
