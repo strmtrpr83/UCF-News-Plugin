@@ -58,7 +58,9 @@ if ( ! class_exists( 'External_Stories_Shortcode' ) ) {
 		}
 
 		public static function sc_external_stories( $attr, $content='' ) {
-			$feed_url = get_option( 'ucf_external_stories_feed_url' );
+			$defaults = UCF_News_Config::$default_plugin_options;
+
+			$feed_url = get_option( 'ucf_external_stories_feed_url', $defaults['ucf_external_stories_feed_url'] );
 
 			$attr = shortcode_atts( array(
 				'title'     => 'In the News',
