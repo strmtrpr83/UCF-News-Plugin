@@ -51,14 +51,14 @@ if ( ! function_exists( 'ucf_news_display_classic' ) ) {
 	<?php else : ?>
 	<?php
 		foreach( $items as $item ) :
-			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+			$item_img = UCF_News_Common::get_story_img_tag( $item );
 	?>
 			<div class="ucf-news-item">
-			<?php if ( $item_img ): ?>
+				<?php if ( $item_img ): ?>
 				<div class="ucf-news-thumbnail">
-					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>" alt="">
+					<?php echo $item_img; ?>
 				</div>
-			<?php endif; ?>
+				<?php endif; ?>
 				<div class="ucf-news-item-title">
 					<a href="<?php echo $item->link; ?>">
 						<?php echo $item->title->rendered; ?>
