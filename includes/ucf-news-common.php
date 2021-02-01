@@ -68,25 +68,63 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 			return $before . $title . $content . $after;
 		}
 
-		public static function get_fallback_image( $size='thumbnail' ) {
-			$image_id = get_option( 'ucf_news_fallback_image', null );
-			$retval = null;
-			if ( $image_id ) {
-				$retval = wp_get_attachment_image_src( $image_id, $size );
-				$retval = $retval ? $retval[0] : null;
+		/**
+		 * Returns an image URL or image details to use for
+		 * a story's fallback thumbnail.
+		 *
+		 * @param string $size Registered image size that the fallback thumbnail should be sized at
+		 * @param bool $return_details If true, this function will return an array of image data
+		 * @return mixed array of image data if $return_details=true, or image URL string
+		 */
+		public static function get_fallback_image( $size='thumbnail', $return_details=false ) {
+			$img_url     = '';
+			$img_details = array( 0 => '', 1 => '', 2 => '' );
+			$img_id      = get_option( 'ucf_news_fallback_image', null );
+
+			if ( $img_id ) {
+				$wp_img_details = wp_get_attachment_image_src( $img_id, $size );
+				if ( $wp_img_details ) {
+					$img_details = $wp_img_details;
+					$img_url     = $img_details ? $img_details[0] : '';
+				}
 			}
 
-			return $retval;
+			return $return_details ? $img_details : $img_url;
 		}
 
-		public static function get_story_image_or_fallback( $item ) {
-			$img_url        = null;
+		/**
+		 * Returns an image URL or image details to use for
+		 * a story's thumbnail.
+		 *
+		 * @param object $item Feed item for the story
+		 * @param bool $return_details If true, this function will return an array of image data
+		 * @return mixed array of image data if $return_details=true, or image URL string
+		 */
+		public static function get_story_image_or_fallback( $item, $return_details=false ) {
+			$img_url        = '';
+			$img_details    = array( 0 => '', 1 => '', 2 => '' );
 			$thumbnail      = property_exists( $item, 'thumbnail' ) ? $item->thumbnail : false;
 			$featured_media = isset( $item->_embedded->{'wp:featuredmedia'} ) ? $item->_embedded->{'wp:featuredmedia'} : false;
 
 			// Check for Today's custom 'thumbnail' field
 			if ( $thumbnail ) {
 				$img_url = $thumbnail;
+
+				// Try to sniff for img dim's in featured
+				// image metadata:
+				if ( $return_details && is_array( $featured_media ) ) {
+					$img_details[0] = $img_url;
+					$img_obj = $featured_media[0];
+					if ( isset( $img_obj->media_details->sizes ) ) {
+						foreach ( (array) $img_obj->media_details->sizes as $size ) {
+							if ( $size->source_url === $img_url ) {
+								$img_details[1] = $size->width ?? '';
+								$img_details[2] = $size->height ?? '';
+								break;
+							}
+						}
+					}
+				}
 			}
 			// As a fallback for sites not pointing to Today,
 			// try to use featured image data instead
@@ -94,16 +132,43 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 				$img_obj = $featured_media[0];
 
 				if ( isset( $img_obj->media_details->sizes->medium->source_url ) ) {
-					$img_url = $img_obj->media_details->sizes->medium->source_url;
+					$img_url = $img_obj->media_details->sizes->medium->source_url ?? '';
+
+					if ( $return_details ) {
+						$img_details[0] = $img_url;
+						$img_details[1] = $img_obj->media_details->sizes->medium->width ?? '';
+						$img_details[2] = $img_obj->media_details->sizes->medium->height ?? '';
+					}
 				}
 			}
 
 			// If the feature image isn't defined, use the fallback image
 			if ( ! $img_url ) {
-				$img_url = self::get_fallback_image();
+				$img_details = self::get_fallback_image( 'thumbnail', true );
+				$img_url     = $img_details[0];
 			}
 
-			return $img_url;
+			return $return_details ? $img_details : $img_url;
+		}
+
+		/**
+		 * Returns an <img> tag to use for a story's thumbnail.
+		 *
+		 * @since 2.2.2
+		 * @author Jo Dickson
+		 * @param object $item Feed item for the story
+		 * @param string $css_class CSS class(es) to apply to the <img> tag
+		 * @return string HTML <img> tag
+		 */
+		public static function get_story_img_tag( $item, $css_class='ucf-news-thumbnail-image' ) {
+			$img_details = self::get_story_image_or_fallback( $item, true );
+			if ( ! $img_details || ! $img_details[0] ) return '';
+
+			ob_start();
+		?>
+			<img src="<?php echo $img_details[0]; ?>" class="<?php echo $css_class; ?>" alt="" width="<?php echo $img_details[1]; ?>" height="<?php echo $img_details[2]; ?>">
+		<?php
+			return trim( ob_get_clean() );
 		}
 
 		public static function get_story_terms( $item, $taxonomy ) {
