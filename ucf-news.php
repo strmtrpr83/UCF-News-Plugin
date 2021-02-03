@@ -2,7 +2,7 @@
 /*
 Plugin Name: UCF News
 Description: Contains shortcode and widget for displaying UCF News Feeds
-Version: 2.2.1
+Version: 2.2.2
 Author: UCF Web Communications
 License: GPL3
 Github Plugin URI: UCF/UCF-News-Plugin
@@ -11,21 +11,24 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define( 'UCF_NEWS__PLUGIN_URL', plugins_url( basename( dirname( __FILE__ ) ) ) );
+define( 'UCF_NEWS__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'UCF_NEWS__STATIC_URL', UCF_NEWS__PLUGIN_URL . '/static' );
 define( 'UCF_NEWS__PLUGIN_FILE', __FILE__ );
 
-require_once 'includes/ucf-news-config.php';
-require_once 'includes/ucf-news-feed.php';
-require_once 'includes/ucf-news-common.php';
-require_once 'includes/ucf-news-shortcode.php';
-require_once 'includes/external-stories-shortcode.php';
-require_once 'includes/ucf-news-widget.php';
-require_once 'admin/ucf-news-admin.php';
-require_once 'admin/ucf-news-api.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'includes/ucf-news-config.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'includes/ucf-news-feed.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'includes/ucf-news-common.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'includes/ucf-news-shortcode.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'includes/external-stories-shortcode.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'includes/ucf-news-widget.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'admin/ucf-news-admin.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'admin/ucf-news-api.php';
 
-require_once 'layouts/ucf-news-classic.php';
-require_once 'layouts/ucf-news-modern.php';
-require_once 'layouts/ucf-news-card.php';
-require_once 'layouts/external-stories-classic.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-news-classic.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-news-modern.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-news-card.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'layouts/external-stories-classic.php';
 
 if ( ! function_exists( 'ucf_news_activate' ) ) {
 	function ucf_news_activate() {
