@@ -44,7 +44,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 			$items = array( $items );
 		}
 
-		$per_row = $args['per_row'];
+		$per_row = intval( $args['per_row'] );
 
 		ob_start();
 
@@ -54,7 +54,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 
 		foreach ( $items as $index=>$item ) :
 			$date = date( "M d", strtotime( $item->date ) );
-			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+			$item_img = UCF_News_Common::get_story_img_tag( $item );
 	?>
 		<?php
 			if( $index !== 0 && ( $index % $per_row ) === 0 ) {
@@ -63,7 +63,10 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 		?>
 		<div class="ucf-news-card">
 			<a class="ucf-news-card-link" href="<?php echo $item->link; ?>">
-				<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image" alt="<?php echo $item->title->rendered; ?>">
+				<?php if ( $item_img ): ?>
+					<?php echo $item_img; ?>
+				<?php endif; ?>
+
 				<div class="ucf-news-card-block">
 					<h3 class="ucf-news-card-title"><?php echo $item->title->rendered; ?></h3>
 					<p class="ucf-news-card-text"><?php echo $date; ?></p>

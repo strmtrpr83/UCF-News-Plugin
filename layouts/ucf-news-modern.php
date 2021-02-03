@@ -49,16 +49,16 @@ if ( ! function_exists( 'ucf_news_display_modern' ) ) {
 	if ( count( $items ) === 0 ) : echo $fallback_message; else :
 
 		foreach( $items as $item ) :
-			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+			$item_img = UCF_News_Common::get_story_img_tag( $item );
 			$section = UCF_News_Common::get_story_primary_section( $item );
 	?>
 		<div class="ucf-news-item">
 			<a href="<?php echo $item->link; ?>">
-			<?php if ( $item_img ) : ?>
+				<?php if ( $item_img ) : ?>
 				<div class="ucf-news-thumbnail">
-					<img src="<?php echo $item_img; ?>" class="ucf-news-thumbnail-image" alt="">
+					<?php echo $item_img; ?>
 				</div>
-			<?php endif; ?>
+				<?php endif; ?>
 				<div class="ucf-news-item-content">
 					<?php if ( $section ): ?>
 					<div class="ucf-news-section">
