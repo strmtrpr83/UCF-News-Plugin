@@ -2,7 +2,7 @@
 Contributors: ucfwebcom
 Requires at least: 5.3
 Tested up to: 5.3
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
@@ -21,6 +21,15 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 
 == Changelog ==
+
+= 2.2.2 =
+Enhancements:
+* Added `width`/`height` attributes to `<img>` tags in this plugin's provided layouts that utilize story thumbnails.  Themes and other plugins can utilize `UCF_News_Common::get_story_img_tag()` to display thumbnails with these attributes applied in custom layouts.
+* Updated required files in main plugin files to use absolute paths.
+* Upgraded packages
+
+Upgrade notice:
+* PHP 7.x is now required.
 
 = 2.2.1 =
 Bug Fixes:
@@ -138,7 +147,7 @@ Bug Fixes:
 
 == Upgrade Notice ==
 
-n/a
+* v2.2.2: PHP 7.0+ is required.
 
 
 == Development ==

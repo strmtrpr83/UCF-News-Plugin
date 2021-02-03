@@ -15,6 +15,15 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 ## Changelog ##
 
+### 2.2.2 ###
+Enhancements:
+* Added `width`/`height` attributes to `<img>` tags in this plugin's provided layouts that utilize story thumbnails.  Themes and other plugins can utilize `UCF_News_Common::get_story_img_tag()` to display thumbnails with these attributes applied in custom layouts.
+* Updated required files in main plugin files to use absolute paths.
+* Upgraded packages
+
+Upgrade notice:
+* PHP 7.x is now required.
+
 ### 2.2.1 ###
 Bug Fixes:
 * Updated to ensure the `ucf_external_stories_feed_url` has a default value even if there isn't one in the options table.
@@ -131,7 +140,7 @@ Bug Fixes:
 
 ## Upgrade Notice ##
 
-n/a
+* v2.2.2: PHP 7.0+ is required.
 
 
 ## Development ##
