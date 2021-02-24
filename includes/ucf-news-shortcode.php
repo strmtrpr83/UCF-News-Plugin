@@ -94,6 +94,7 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 				'offset'    => 0,
 				'limit'     => 3,
 				'per_row'   => 3,
+				'show_img'  => true,
 				'feed_url'  => ''
 			), $attr );
 
