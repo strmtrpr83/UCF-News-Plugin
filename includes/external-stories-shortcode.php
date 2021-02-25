@@ -48,7 +48,7 @@ if ( ! class_exists( 'External_Stories_Shortcode' ) ) {
 					'desc'    => 'Displays a feed of UCF External Stories (In the News)',
 					'content' => false,
 					'fields'  => $fields,
-					'preview' => true,
+					'preview' => false,
 					'group'   => 'UCF News'
 				);
 

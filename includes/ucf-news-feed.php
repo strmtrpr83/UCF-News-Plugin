@@ -118,6 +118,37 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 
 			return self::get_json_feed( $url );
 		}
+
+		/**
+		 * Returns statements from the statements wp-json feed
+		 * @author Jim Barnes
+		 * @since 2.3.0
+		 * @param array The argument array
+		 * @return array An array of statement items
+		 */
+		public static function get_statements( $args ) {
+			$params = array();
+
+			if ( isset( $args['limit'] ) ) {
+				$params['limit'] = $args['limit'];
+			}
+
+			if ( isset( $args['offset'] ) ) {
+				$params['offset'] = $args['offset'];
+			}
+
+			$param_string = urldecode( http_build_query( $params ) );
+
+			$feed_url = $args['feed_url'];
+
+			$url = "{$feed_url}statements/";
+
+			if ( $param_string && strlen( $param_string ) > 0 ) {
+				$url .= "?$param_string";
+			}
+
+			return self::get_json_feed( $url );
+		}
 	}
 }
 ?>
