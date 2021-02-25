@@ -69,6 +69,44 @@ if ( ! class_exists( 'UCF_News_Common' ) ) {
 		}
 
 		/**
+		 * The default filters and functions for display a list
+		 * of UCF Statements
+		 * @author Jim Barnes
+		 * @since 2.3.0
+		 * @param array $items The array of statement items
+		 * @param string $layout The layout to use
+		 * @param array $args Additional arguments
+		 * @return string
+		 */
+		public static function display_statements( $items, $layout, $args ) {
+			if ( has_filter( "ucf_statements_{$layout}_before" ) ) {
+				$before = apply_filters( "ucf_statements_{$layout}_before", null, $items, $args );
+			} else {
+				$before = ucf_statements_classic_before( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_statements_{$layout}_title" ) ) {
+				$title = apply_filters( "ucf_statements_{$layout}_title", null, $items, $args );
+			} else {
+				$title = ucf_statements_classic_title( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_statements_{$layout}_content" ) ) {
+				$content = apply_filters( "ucf_statements_{$layout}_content", null, $items, $args );
+			} else {
+				$content = ucf_statements_classic_content( null, $items, $args );
+			}
+
+			if ( has_filter( "ucf_statements_{$layout}_after" ) ) {
+				$after = apply_filters( "ucf_statements_{$layout}_after", null, $items, $args );
+			} else {
+				$after = ucf_statements_classic_after( null, $items, $args );
+			}
+
+			return $before . $title . $content . $after;
+		}
+
+		/**
 		 * Returns an image URL or image details to use for
 		 * a story's fallback thumbnail.
 		 *
