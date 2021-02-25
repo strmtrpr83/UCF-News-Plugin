@@ -143,7 +143,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 
 			$url = "{$feed_url}statements/";
 
-			if ( count( $param_string ) > 0 ) {
+			if ( $param_string && count( $param_string ) > 0 ) {
 				$url .= "?$param_string";
 			}
 
