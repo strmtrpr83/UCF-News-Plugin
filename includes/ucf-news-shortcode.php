@@ -87,15 +87,15 @@ if ( ! class_exists( 'UCF_News_Shortcode' ) ) {
 
 		public static function sc_ucf_news_feed( $attr, $content='' ) {
 			$attr = shortcode_atts( array(
-				'title'     => 'News',
-				'layout'    => 'classic',
-				'sections'  => '',
-				'topics'    => '',
-				'offset'    => 0,
-				'limit'     => 3,
-				'per_row'   => 3,
-				'show_img'  => true,
-				'feed_url'  => ''
+				'title'      => 'News',
+				'layout'     => 'classic',
+				'sections'   => '',
+				'topics'     => '',
+				'offset'     => 0,
+				'limit'      => 3,
+				'per_row'    => 3,
+				'show_image' => true,
+				'feed_url'   => ''
 			), $attr );
 
 			$title    = $attr['title'];
