@@ -6,13 +6,14 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 	class UCF_News_Config {
 		public static
 			$default_options = array(
-				'title'     => 'News',
-				'layout'    => 'classic',
-				'sections'  => '',
-				'topics'    => '',
-				'limit'     => 3,
-				'per_row'   => 3,
-				'offset'    => 0
+				'title'      => 'News',
+				'layout'     => 'classic',
+				'sections'   => '',
+				'topics'     => '',
+				'limit'      => 3,
+				'per_row'    => 3,
+				'show_image' => true,
+				'offset'     => 0
 			),
 			$default_plugin_options = array(
 				'ucf_news_feed_url'             => 'https://www.ucf.edu/news/wp-json/wp/v2/',
@@ -101,6 +102,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 						$list[$key] = intval( $val );
 						break;
 					case 'ucf_news_include_css':
+					case 'show_image':
 						$list[$key] = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
 						break;
 					default:

@@ -45,6 +45,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 		}
 
 		$per_row = intval( $args['per_row'] );
+		$show_image = filter_var( $args['show_image'], FILTER_VALIDATE_BOOLEAN );
 
 		ob_start();
 
@@ -63,7 +64,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 		?>
 		<div class="ucf-news-card">
 			<a class="ucf-news-card-link" href="<?php echo $item->link; ?>">
-				<?php if ( $item_img ): ?>
+				<?php if ( $item_img && $show_image ): ?>
 					<?php echo $item_img; ?>
 				<?php endif; ?>
 
