@@ -38,16 +38,16 @@ if ( ! function_exists( 'ucf_statements_classic_content' ) ) {
 	?>
 		<article class="mb-4">
 			<a href="<?php echo $item->link; ?>" target="_blank" rel="nofollow">
-				<h3 class="h6 text-secondary ucf-statement-title"><?php echo $item->title->rendered; ?></h3>
+				<strong class="d-block h6 text-secondary ucf-statement-title"><?php echo $item->title->rendered; ?></strong>
 			</a>
 			<?php if ( $item->tu_author ) : ?>
 			<cite class="ucf-statement-author text-muted text-small">
 				<?php echo $item->tu_author->name; ?>
 			</cite>
 			<?php endif; ?>
-			<div class="ucf-statement-date">
+			<time datetime="<?php echo $item->date; ?>" class="d-block ucf-statement-date">
 				<?php echo date('F j, Y', strtotime($item->date)); ?>
-			</div>
+			</time>
 		</article>
 	<?php
 		endforeach;
