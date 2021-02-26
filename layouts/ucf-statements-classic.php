@@ -41,7 +41,7 @@ if ( ! function_exists( 'ucf_statements_classic_content' ) ) {
 		<?php endif; ?>
 		<article class="mb-3">
 			<a href="<?php echo $item->link; ?>" target="_blank" rel="nofollow">
-				<strong class="d-block h6 text-primary ucf-statement-title text-primary"><?php echo $item->title->rendered; ?></strong>
+				<strong class="d-block h6 ucf-statement-title text-primary"><?php echo $item->title->rendered; ?></strong>
 			</a>
 			<?php if ( $item->tu_author ) : ?>
 			<cite class="ucf-statement-author font-italic">
