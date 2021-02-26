@@ -130,7 +130,7 @@ if ( ! class_exists( 'UCF_News_Feed' ) ) {
 			$params = array();
 
 			if ( isset( $args['limit'] ) ) {
-				$params['limit'] = $args['limit'];
+				$params['per_page'] = $args['limit'];
 			}
 
 			if ( isset( $args['offset'] ) ) {
