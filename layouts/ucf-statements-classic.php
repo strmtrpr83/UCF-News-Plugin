@@ -41,14 +41,14 @@ if ( ! function_exists( 'ucf_statements_classic_content' ) ) {
 		<?php endif; ?>
 		<article class="mb-3">
 			<a href="<?php echo $item->link; ?>" target="_blank" rel="nofollow">
-				<strong class="d-block h6 ucf-statement-title mb-1"><?php echo $item->title->rendered; ?></strong>
+				<strong class="d-block h5 ucf-statement-title mb-1"><?php echo $item->title->rendered; ?></strong>
 			</a>
 			<?php if ( $item->tu_author ) : ?>
-			<cite class="ucf-statement-author font-italic">
+			<cite class="ucf-statement-author d-block font-italic">
 				<?php echo $item->tu_author->fullname; ?>
 			</cite>
 			<?php endif; ?>
-			<time datetime="<?php echo $item->date; ?>" class="d-block ucf-statement-date text-muted small">
+			<time datetime="<?php echo $item->date; ?>" class="d-block ucf-statement-date small text-default">
 				<?php echo date('F j, Y', strtotime($item->date)); ?>
 			</time>
 		</article>
