@@ -66,7 +66,7 @@ if ( ! class_exists( 'UCF_Statements_Shortcode' ) ) {
 			$args = array(
 				'feed_url' => $feed_url,
 				'offset'   => $attr['offset'] ? (int) $attr['offset'] : 0,
-				'per_page'    => $attr['limit'] ? (int) $attr['limit'] : 3
+				'limit'    => $attr['limit'] ? (int) $attr['limit'] : 3
 			);
 
 			$items = UCF_News_Feed::get_statements( $args );
