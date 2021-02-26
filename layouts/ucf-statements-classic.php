@@ -34,18 +34,21 @@ if ( ! function_exists( 'ucf_statements_classic_content' ) ) {
 	function ucf_statements_classic_content( $content, $items, $args ) {
 		ob_start();
 
-		foreach( $items as $item ) :
+		foreach( $items as $idx => $item ) :
 	?>
-		<article class="mb-4">
+		<?php if ( $idx !== 0 ) : ?>
+		<hr class="hr-1">
+		<?php endif; ?>
+		<article class="mb-3">
 			<a href="<?php echo $item->link; ?>" target="_blank" rel="nofollow">
-				<strong class="d-block h6 text-secondary ucf-statement-title"><?php echo $item->title->rendered; ?></strong>
+				<strong class="d-block h6 text-primary ucf-statement-title text-primary"><?php echo $item->title->rendered; ?></strong>
 			</a>
 			<?php if ( $item->tu_author ) : ?>
-			<cite class="ucf-statement-author text-muted text-small">
-				<?php echo $item->tu_author->name; ?>
+			<cite class="ucf-statement-author font-italic">
+				<?php echo $item->tu_author->fullname; ?>
 			</cite>
 			<?php endif; ?>
-			<time datetime="<?php echo $item->date; ?>" class="d-block ucf-statement-date">
+			<time datetime="<?php echo $item->date; ?>" class="d-block ucf-statement-date text-muted small">
 				<?php echo date('F j, Y', strtotime($item->date)); ?>
 			</time>
 		</article>
