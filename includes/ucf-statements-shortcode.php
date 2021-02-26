@@ -53,10 +53,11 @@ if ( ! class_exists( 'UCF_Statements_Shortcode' ) ) {
 			);
 
 			$attr = shortcode_atts( array(
-				'title'  => 'Recent Statements',
-				'layout' => 'classic',
-				'offset' => 0,
-				'limit'  => 3
+				'title'     => 'Recent Statements',
+				'layout'    => 'classic',
+				'col_class' => 'col-12 col-sm-6 col-md-4 col-xl-3', // Passed to each column in the card layout
+				'offset'    => 0,
+				'limit'     => 3
 			), $attr );
 
 			$title  = $attr['title'];
