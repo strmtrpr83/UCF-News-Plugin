@@ -15,6 +15,12 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 ## Changelog ##
 
+### 2.3.0 ###
+Enhancements:
+* Added a `show_image` option to the `ucf-news-feed` shortcode, specifically used by the `card` layout. When set to false, the image from the feed will not be displayed.
+* Added the `ucf-statements` shortcode, which provides a way of listing `statement` posts from the News website.
+* Added the `classic` layout for the `ucf-statements` shortcode.
+
 ### 2.2.2 ###
 Enhancements:
 * Added `width`/`height` attributes to `<img>` tags in this plugin's provided layouts that utilize story thumbnails.  Themes and other plugins can utilize `UCF_News_Common::get_story_img_tag()` to display thumbnails with these attributes applied in custom layouts.
