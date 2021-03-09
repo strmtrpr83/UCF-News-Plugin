@@ -2,7 +2,7 @@
 Contributors: ucfwebcom
 Requires at least: 5.3
 Tested up to: 5.3
-Stable tag: 2.2.2
+Stable tag: 2.3.0
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
@@ -21,6 +21,12 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 
 == Changelog ==
+
+= 2.3.0 =
+Enhancements:
+* Added a `show_image` option to the `ucf-news-feed` shortcode, specifically used by the `card` layout. When set to false, the image from the feed will not be displayed.
+* Added the `ucf-statements` shortcode, which provides a way of listing `statement` posts from the News website.
+* Added the `classic` layout for the `ucf-statements` shortcode.
 
 = 2.2.2 =
 Enhancements:
