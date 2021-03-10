@@ -43,9 +43,10 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 
 		public static function get_layouts() {
 			$layouts = array(
-				'classic' => 'Classic Layout',
-				'modern'  => 'Modern Layout',
-				'card'    => 'Card Layout'
+				'classic'     => 'Classic Layout',
+				'modern'      => 'Modern Layout',
+				'card'        => 'Card Layout',
+				'header_card' => 'Header Card Layout'
 			);
 
 			$layouts = apply_filters( 'ucf_news_get_layouts', $layouts );
