@@ -22,6 +22,10 @@ Head over to the [UCF News Plugin wiki](https://github.com/UCF/UCF-News-Plugin/w
 
 == Changelog ==
 
+= 2.3.1 =
+Enhancements:
+* Added a header card layout.
+
 = 2.3.0 =
 Enhancements:
 * Added a `show_image` option to the `ucf-news-feed` shortcode, specifically used by the `card` layout. When set to false, the image from the feed will not be displayed.

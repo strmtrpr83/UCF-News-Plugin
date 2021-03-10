@@ -29,6 +29,7 @@ require_once UCF_NEWS__PLUGIN_DIR . 'admin/ucf-news-api.php';
 require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-news-classic.php';
 require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-news-modern.php';
 require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-news-card.php';
+require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-news-header-card.php';
 require_once UCF_NEWS__PLUGIN_DIR . 'layouts/external-stories-classic.php';
 require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-statements-classic.php';
 require_once UCF_NEWS__PLUGIN_DIR . 'layouts/ucf-statements-card.php';
