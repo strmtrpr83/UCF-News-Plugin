@@ -46,6 +46,7 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 
 		$per_row = intval( $args['per_row'] );
 		$show_image = filter_var( $args['show_image'], FILTER_VALIDATE_BOOLEAN );
+		$show_date  = filter_var( $args['show_date'], FILTER_VALIDATE_BOOLEAN );
 
 		ob_start();
 
@@ -70,7 +71,9 @@ if ( ! function_exists( 'ucf_news_display_card' ) ) {
 
 				<div class="ucf-news-card-block">
 					<h3 class="ucf-news-card-title"><?php echo $item->title->rendered; ?></h3>
+				<?php if ( $show_date ): ?>
 					<p class="ucf-news-card-text"><?php echo $date; ?></p>
+				<?php endif; ?>
 				</div>
 			</a>
 		</div>

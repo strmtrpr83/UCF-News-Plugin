@@ -13,6 +13,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				'limit'      => 3,
 				'per_row'    => 3,
 				'show_image' => true,
+				'show_date'  => true,
 				'offset'     => 0
 			),
 			$default_plugin_options = array(
@@ -104,6 +105,9 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 						break;
 					case 'ucf_news_include_css':
 					case 'show_image':
+						$list[$key] = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
+						break;
+					case 'show_date':
 						$list[$key] = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
 						break;
 					default:
