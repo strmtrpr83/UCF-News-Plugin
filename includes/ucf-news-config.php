@@ -185,7 +185,7 @@ if ( ! class_exists( 'UCF_News_Config' ) ) {
 				<tr valign="top">
 					<th scope="row">Fallback Image</th>
 					<td>				
-						<img class="ucf_news_fallback_image_preview" src="<?php echo $ucf_news_fallback_image_src; ?>" style="max-width:150px;max-height:150px;<?php echo(empty($ucf_news_fallback_image_src)?"display:none;":""); ?>"><br/>
+						<img class="ucf_news_fallback_image_preview" alt="Fallback Image Preview" src="<?php echo $ucf_news_fallback_image_src; ?>" style="max-width:150px;max-height:150px;<?php echo(empty($ucf_news_fallback_image_src)?"display:none;":""); ?>"><br/>
 						<p class="ucf_news_fallback_message" style="margin:-1em 0 1em 0;<?php echo(empty($ucf_news_fallback_image_src)?"":"display:none;");?>">No fallback image has been selected</p>
 						<input class="ucf_news_fallback_image" type="hidden" name="ucf_news_fallback_image" value="<?php echo $ucf_news_fallback_image; ?>">
 						<a href="#" class="ucf_news_clear_image_upload button button-primary" style="<?php echo(empty($ucf_news_fallback_image_src)?"display:none;":""); ?>">Remove Image</a>
